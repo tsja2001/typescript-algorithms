@@ -1,4 +1,4 @@
-import { lastRemaining } from './../example/02_约瑟夫环';
+import { lastRemaining } from '../example/02_约瑟夫环';
 import { Queue } from '../lib/01_创建queue';
 
 describe('约瑟夫环', () => {

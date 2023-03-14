@@ -1,4 +1,4 @@
-import { Queue } from './../lib/01_创建queue'
+import { Queue } from '../lib/01_创建queue'
 /**
  * https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
  */

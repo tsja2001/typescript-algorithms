@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
-      "@stack/*": ["src/01_stack/*"],
+      "@stack/*": ["src/01_Stack/*"],
     }
   },
   "include": ["./src/**/*"],
