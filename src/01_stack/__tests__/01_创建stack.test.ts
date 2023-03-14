@@ -1,4 +1,4 @@
-import { Stack } from '../01_创建stack'
+import { Stack } from '../lib/01_创建stack'
 
 describe('Stack', () => {
   let stack: any = null

@@ -1,4 +1,4 @@
-import { Stack } from './02_重构stack'
+import { Stack } from '../lib/02_重构stack'
 
 export const isValid = (s: string) => {
   const stack = new Stack<string>()

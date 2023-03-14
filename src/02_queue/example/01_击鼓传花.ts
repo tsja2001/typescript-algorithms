@@ -1,4 +1,4 @@
-import { Queue } from './01_创建queue'
+import { Queue } from '../lib/01_创建queue'
 export const hotPotato = (arr: string[], num: number) => {
   const queue = new Queue<string>()
 

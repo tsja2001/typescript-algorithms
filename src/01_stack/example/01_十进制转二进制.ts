@@ -1,5 +1,5 @@
 // import { Stack } from './01_创建stack';
-import { Stack } from './02_重构stack'
+import { Stack } from '../lib/02_重构stack'
 
 export const decimalToBinary: (decimal: number) => string = (
   decimal

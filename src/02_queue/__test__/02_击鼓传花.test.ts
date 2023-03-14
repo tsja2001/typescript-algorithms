@@ -1,4 +1,4 @@
-import { hotPotato } from '../02_击鼓传花'
+import { hotPotato } from '../example/01_击鼓传花'
 
 describe('hotPotato', () => {
   test('当传入的数组中只有一个元素时，返回该元素', () => {

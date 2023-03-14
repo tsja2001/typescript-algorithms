@@ -1,4 +1,4 @@
-import { isValid } from '../05_有效的括号';
+import { isValid } from '../example/02_有效的括号';
 
 describe('05_有效的括号', () => {
 	it('05_有效的括号', () => {

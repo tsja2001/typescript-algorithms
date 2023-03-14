@@ -1,4 +1,4 @@
-import { decimalToBinary } from '../04_十进制转二进制'
+import { decimalToBinary } from '../example/01_十进制转二进制'
 
 describe('Stack', () => {
   it('get Binary', () => {

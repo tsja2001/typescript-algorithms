@@ -1,4 +1,4 @@
-import { IStack } from './IStack';
+import { IStack } from '../types/IStack';
 export class LinkedStack<T> implements IStack<T> {
 	push(element: T): void {
 		throw new Error('Method not implemented.');
