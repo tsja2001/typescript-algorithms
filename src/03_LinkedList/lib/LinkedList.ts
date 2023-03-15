@@ -43,18 +43,74 @@ export class LinkedList<T> {
   }
 
   // 插入节点
-  insert(value: T, index: number): boolean {
-    if (index < 0 || index > this.size) return false
+  insert(
+    value: T,
+    position: number,
+    changeLog: boolean = false
+  ): boolean {
+    // 如果越界, 返回false
+    if (position < 0 || position > this.size) return false
 
     const newNode = new Node(value)
 
-    // 头节点
-    if (index === 0) {
+    if (position === 0) {
       newNode.next = this.head
       this.head = newNode
+    } else {
+      let current = this.head
+      let previous: Node<T> | null = null
+
+      let index = 0
+
+      while (index < position) {
+        index++
+        previous = current
+        current = current!.next
+      }
+
+      const node = new Node(value)
+
+      node.next = current
+      previous!.next = node
+    }
+
+    this.size++
+
+    if (changeLog) {
+      console.log(`在${position}位置插入${value}, 插入后为⬇️`)
+      this.traverse()
     }
 
     return true
+  }
+
+  // 删除节点
+  removeAt(position: number, changeLog: boolean = false): T | null {
+    if (position < 0 || position >= this.size) return null
+
+    let current = this.head
+    let previous: Node<T> | null = null
+
+    if (position === 0) {
+      this.head = current?.next ?? null
+    } else {
+      let index = 0
+      while (index++ < position && current) {
+        previous = current
+        current = current.next
+      }
+
+      previous!.next = current?.next ?? null
+    }
+
+    this.size--
+
+    if (changeLog) {
+      console.log(`在${position}位置删除, 删除后为⬇️`)
+      this.traverse()
+    }
+
+    return current?.value ?? null
   }
 
   get length() {
@@ -71,8 +127,9 @@ linkedlist.append('dddd')
 
 console.log('当前链表')
 linkedlist.traverse()
-console.log('头插入元素')
-linkedlist.insert('123', 0)
-linkedlist.insert('aaa', 0)
+
+linkedlist.removeAt(3, true)
+
 console.log('当前链表')
-linkedlist.traverse()
+// linkedlist.traverse()
+//
