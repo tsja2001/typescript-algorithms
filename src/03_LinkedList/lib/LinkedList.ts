@@ -93,7 +93,7 @@ export class LinkedList<T> {
     return true
   }
 
-  // 删除节点
+  // 删除节点根据索引
   removeAt(position: number, showLog: boolean = false): T | null {
     if (position < 0 || position >= this.size) return null
 
@@ -119,6 +119,15 @@ export class LinkedList<T> {
     return current?.value ?? null
   }
 
+  // 删除节点根据值
+  remove(value: T): boolean{
+    const index = this.indexOf(value)
+    if(index === -1) return false
+    this.removeAt(index)
+
+    return true
+  }
+
   // 查找节点
   get(position: number, showLog: boolean = false): T | null {
     if (position < 0 || position > this.size - 1) {
@@ -134,10 +143,43 @@ export class LinkedList<T> {
 
     return current?.value ?? null
   }
+
+  // 更新节点
+  update(value: T, position: number): boolean{
+    if(position < 0 || position >= this.size) return false
+
+    const node = this.getNode(position)
+    node!.value = value
+
+    return true
+  }
+
+  // 查找索引
+  indexOf(value: T): number{
+    let currentNode = this.head
+    let index = 0
+    while(currentNode !== null){
+      if(currentNode.value === value){
+        return index
+      }
+
+      index ++
+
+      currentNode = currentNode.next
+    }
+
+    return -1
+  }
+
+  // 判断节点是否为空
+  isEmpty(): boolean{
+    return this.size === 0
+  }
 }
 
 const linkedlist = new LinkedList<string>()
 
+console.log(linkedlist.isEmpty())
 linkedlist.append('aaaa')
 linkedlist.append('bbbb')
 linkedlist.append('cccc')
@@ -146,11 +188,10 @@ linkedlist.append('dddd')
 console.log('当前链表')
 linkedlist.traverse()
 
-linkedlist.get(1, true)
-linkedlist.get(3, true)
-linkedlist.get(2, true)
 
-// linkedlist.removeAt(3, true)
+console.log(linkedlist.indexOf('aaaa'))
+console.log(linkedlist.indexOf('bbbbb'))
+console.log(linkedlist.isEmpty())
 
 console.log('当前链表')
 linkedlist.traverse()
