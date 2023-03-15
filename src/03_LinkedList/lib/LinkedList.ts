@@ -10,6 +10,25 @@ export class LinkedList<T> {
   private size: number = 0
   private head: Node<T> | null = null
 
+  get length() {
+    return this.size
+  }
+
+  private getNode(position: number): Node<T> | null {
+    let currentNode = this.head
+
+    if (position < 0 || position > this.size - 1) {
+      return null
+    }
+    
+    let index = 0
+    while (index++ < position && currentNode) {
+      currentNode = currentNode?.next
+    }
+
+    return currentNode ?? null
+  }
+
   // 向链表中追加元素
   append(value: T) {
     const newNode = new Node(value)
@@ -113,8 +132,20 @@ export class LinkedList<T> {
     return current?.value ?? null
   }
 
-  get length() {
-    return this.size
+  // 查找节点
+  get(position: number, changeLog: boolean = false): T | null {
+    if (position < 0 || position > this.size - 1) {
+      return null
+    }
+
+    const current = this.getNode(position)
+
+    if (changeLog) {
+      console.log(`在${position}位置找到${current?.value}`)
+      this.traverse()
+    }
+
+    return current?.value ?? null
   }
 }
 
@@ -128,8 +159,12 @@ linkedlist.append('dddd')
 console.log('当前链表')
 linkedlist.traverse()
 
-linkedlist.removeAt(3, true)
+linkedlist.get(1, true)
+linkedlist.get(3, true)
+linkedlist.get(2, true)
+
+// linkedlist.removeAt(3, true)
 
 console.log('当前链表')
-// linkedlist.traverse()
+linkedlist.traverse()
 //
