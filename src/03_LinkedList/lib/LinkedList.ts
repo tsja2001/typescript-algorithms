@@ -1,3 +1,4 @@
+import { ILinkedList } from './../types/ILinkedList'
 export class Node<T> {
   value: T
   next: Node<T> | null = null
@@ -6,21 +7,25 @@ export class Node<T> {
   }
 }
 
-export class LinkedList<T> {
-  private size: number = 0
+export class LinkedList<T> implements ILinkedList<T> {
+  length: number = 0
   head: Node<T> | null = null
 
-  get length() {
-    return this.size
+  size() {
+    return this.length
+  }
+
+  pick() {
+    return this.head?.value
   }
 
   private getNode(position: number): Node<T> | null {
     let currentNode = this.head
 
-    if (position < 0 || position > this.size - 1) {
+    if (position < 0 || position > this.length - 1) {
       return null
     }
-    
+
     let index = 0
     while (index++ < position && currentNode) {
       currentNode = currentNode?.next
@@ -33,7 +38,7 @@ export class LinkedList<T> {
   append(value: T) {
     const newNode = new Node(value)
 
-    this.size++
+    this.length++
 
     if (!this.head) {
       this.head = newNode
@@ -68,7 +73,7 @@ export class LinkedList<T> {
     showLog: boolean = false
   ): boolean {
     // 如果越界, 返回false
-    if (position < 0 || position > this.size) return false
+    if (position < 0 || position > this.length) return false
 
     const newNode = new Node(value)
 
@@ -83,7 +88,7 @@ export class LinkedList<T> {
       previous!.next = node
     }
 
-    this.size++
+    this.length++
 
     if (showLog) {
       console.log(`在${position}位置插入${value}, 插入后为⬇️`)
@@ -95,10 +100,10 @@ export class LinkedList<T> {
 
   // 删除节点根据索引
   removeAt(position: number, showLog: boolean = false): T | null {
-    if (position < 0 || position >= this.size) return null
+    if (position < 0 || position >= this.length) return null
 
     let current = this.head
-    
+
     if (position === 0) {
       this.head = current?.next ?? null
     } else {
@@ -109,7 +114,7 @@ export class LinkedList<T> {
       previous!.next = current?.next ?? null
     }
 
-    this.size--
+    this.length--
 
     if (showLog) {
       console.log(`在${position}位置删除, 删除后为⬇️`)
@@ -120,9 +125,9 @@ export class LinkedList<T> {
   }
 
   // 删除节点根据值
-  remove(value: T): boolean{
+  remove(value: T): boolean {
     const index = this.indexOf(value)
-    if(index === -1) return false
+    if (index === -1) return false
     this.removeAt(index)
 
     return true
@@ -130,7 +135,7 @@ export class LinkedList<T> {
 
   // 查找节点
   get(position: number, showLog: boolean = false): T | null {
-    if (position < 0 || position > this.size - 1) {
+    if (position < 0 || position > this.length - 1) {
       return null
     }
 
@@ -145,8 +150,8 @@ export class LinkedList<T> {
   }
 
   // 更新节点
-  update(value: T, position: number): boolean{
-    if(position < 0 || position >= this.size) return false
+  update(value: T, position: number): boolean {
+    if (position < 0 || position >= this.length) return false
 
     const node = this.getNode(position)
     node!.value = value
@@ -155,15 +160,15 @@ export class LinkedList<T> {
   }
 
   // 查找索引
-  indexOf(value: T): number{
+  indexOf(value: T): number {
     let currentNode = this.head
     let index = 0
-    while(currentNode !== null){
-      if(currentNode.value === value){
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
         return index
       }
 
-      index ++
+      index++
 
       currentNode = currentNode.next
     }
@@ -172,8 +177,8 @@ export class LinkedList<T> {
   }
 
   // 判断节点是否为空
-  isEmpty(): boolean{
-    return this.size === 0
+  isEmpty(): boolean {
+    return this.length === 0
   }
 }
 
@@ -187,7 +192,6 @@ const linkedlist = new LinkedList<string>()
 
 // console.log('当前链表')
 // linkedlist.traverse()
-
 
 // console.log(linkedlist.indexOf('aaaa'))
 // console.log(linkedlist.indexOf('bbbbb'))
