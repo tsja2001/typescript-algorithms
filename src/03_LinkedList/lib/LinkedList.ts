@@ -8,7 +8,7 @@ export class Node<T> {
 
 export class LinkedList<T> {
   private size: number = 0
-  private head: Node<T> | null = null
+  head: Node<T> | null = null
 
   get length() {
     return this.size
@@ -179,20 +179,20 @@ export class LinkedList<T> {
 
 const linkedlist = new LinkedList<string>()
 
-console.log(linkedlist.isEmpty())
-linkedlist.append('aaaa')
-linkedlist.append('bbbb')
-linkedlist.append('cccc')
-linkedlist.append('dddd')
+// console.log(linkedlist.isEmpty())
+// linkedlist.append('aaaa')
+// linkedlist.append('bbbb')
+// linkedlist.append('cccc')
+// linkedlist.append('dddd')
 
-console.log('当前链表')
-linkedlist.traverse()
+// console.log('当前链表')
+// linkedlist.traverse()
 
 
-console.log(linkedlist.indexOf('aaaa'))
-console.log(linkedlist.indexOf('bbbbb'))
-console.log(linkedlist.isEmpty())
+// console.log(linkedlist.indexOf('aaaa'))
+// console.log(linkedlist.indexOf('bbbbb'))
+// console.log(linkedlist.isEmpty())
 
-console.log('当前链表')
-linkedlist.traverse()
-//
+// console.log('当前链表')
+// linkedlist.traverse()
+// //
