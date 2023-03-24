@@ -1,4 +1,4 @@
-const binarySearch = (arrs: number[], num: number) => {
+export const binarySearch = (arrs: number[], num: number) => {
   let left = 0
   let right = arrs.length - 1
 
@@ -17,7 +17,7 @@ const binarySearch = (arrs: number[], num: number) => {
   return -1
 }
 
-const res = binarySearch([0, 1, 2, 3, 4, 5], 5)
-console.log(res)
+// const res = binarySearch([0, 1, 2, 3, 4, 5], 5)
+// console.log(res)
 
-export {}
+// export {}
