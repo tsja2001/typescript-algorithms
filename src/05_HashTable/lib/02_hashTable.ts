@@ -2,7 +2,7 @@ export class HashTable<T = any> {
   // 存放链地址法中的链
   storage: [string, T][][] = []
   // 数组长度
-  private length: number = 7
+  length: number = 7
   // 记录已经存放元素的个数
   private count: number = 0
 
@@ -17,6 +17,28 @@ export class HashTable<T = any> {
     const index = hashCode % max
 
     return index
+  }
+
+  private isPrime(num: number) {
+    // 获取平方根
+    const square = Math.sqrt(num)
+    for (let i = 2; i <= square; i++) {
+      if (num % i === 0) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  private getNextPrime(num: number) {
+    let resNum = num
+
+    while (!this.isPrime(resNum)) {
+      resNum++
+    }
+
+    return resNum
   }
 
   // 增加或者更新元素
@@ -106,7 +128,8 @@ export class HashTable<T = any> {
 
   // 扩容和缩容
   resize(length: number) {
-    this.length = length
+    const newLength = this.getNextPrime(length)
+    this.length = newLength < 7 ? 7 : newLength
     this.count = 0
     const oldStore = this.storage
     this.storage = []
@@ -129,18 +152,21 @@ hashTable.put('vxcvxcv', 75)
 hashTable.put('erw', 75)
 hashTable.put('r', 75)
 
-console.log(hashTable.storage)
+// console.log(hashTable.get('aaa'))
+// console.log(hashTable.get('dfsf'))
+// console.log(hashTable.get('vxcvxcv'))
+
+console.log(hashTable.length)
 hashTable.put('fff', 75)
-console.log('-------')
-console.log(hashTable.storage)
+// console.log('-------')
+console.log(hashTable.length)
 
 hashTable.delete('aaa')
 hashTable.delete('dfsf')
 hashTable.delete('vxcvxcv')
 hashTable.delete('erw')
 hashTable.delete('r')
-console.log('-------')
-console.log(hashTable.storage)
+console.log(hashTable.length)
 
 // console.log(hashTable.get('aaa'))
 // console.log(hashTable.get('bbb'))
