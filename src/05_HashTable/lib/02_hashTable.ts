@@ -1,4 +1,4 @@
-class HashTable<T = any> {
+export class HashTable<T = any> {
   // 存放链地址法中的链
   storage: [string, T][][] = []
   // 数组长度
