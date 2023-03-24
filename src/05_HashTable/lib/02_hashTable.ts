@@ -1,6 +1,6 @@
 class HashTable<T = any> {
   // 存放链地址法中的链
-  private storage: [string, T][][] = []
+  storage: [string, T][][] = []
   // 数组长度
   private length: number = 7
   // 记录已经存放元素的个数
@@ -46,6 +46,12 @@ class HashTable<T = any> {
     if (!isUpdate) {
       bucket.push([key, value])
       this.count++
+
+      // 如果比例大于0.75, 那么就直接扩容
+      const loadFactor = this.count / this.length
+      if (loadFactor >= 0.75) {
+        this.resize(this.length * 2)
+      }
     }
   }
 
@@ -84,24 +90,63 @@ class HashTable<T = any> {
       if (tupleKey === key) {
         bucket.splice(i, 1)
         this.count--
+
+        // 如果比例大于0.75, 那么就直接扩容
+        const loadFactor = this.count / this.length
+        if (loadFactor <= 0.25 && this.length > 7) {
+          const length = Math.floor(this.length / 2)
+          this.resize(length)
+        }
         return tupleValue
       }
     }
 
     return undefined
   }
+
+  // 扩容和缩容
+  resize(length: number) {
+    this.length = length
+    this.count = 0
+    const oldStore = this.storage
+    this.storage = []
+
+    oldStore.forEach((bucket) => {
+      if (!bucket) return
+      for (let i = 0; i < bucket.length; i++) {
+        const tuble = bucket[i]
+        this.put(tuble[0], tuble[1])
+      }
+    })
+  }
 }
 
 const hashTable = new HashTable<number>()
 
 hashTable.put('aaa', 56)
-hashTable.put('bbb', 232)
-hashTable.put('ccc', 75)
+hashTable.put('dfsf', 232)
+hashTable.put('vxcvxcv', 75)
+hashTable.put('erw', 75)
+hashTable.put('r', 75)
 
-console.log(hashTable.get('aaa'))
-console.log(hashTable.get('bbb'))
-console.log(hashTable.get('ccc'))
+console.log(hashTable.storage)
+hashTable.put('fff', 75)
+console.log('-------')
+console.log(hashTable.storage)
 
-console.log('delete', hashTable.delete('ccc'))
-console.log('get', hashTable.get('ccc'))
+hashTable.delete('aaa')
+hashTable.delete('dfsf')
+hashTable.delete('vxcvxcv')
+hashTable.delete('erw')
+hashTable.delete('r')
+console.log('-------')
+console.log(hashTable.storage)
+
+// console.log(hashTable.get('aaa'))
+// console.log(hashTable.get('bbb'))
+// console.log(hashTable.get('ccc'))
+// console.log(hashTable.get('ccc'))
+// console.log(hashTable.get('ccc'))
+// console.log(hashTable.get('ccc'))
+
 // console.log(hashTable.get('ccc'))
