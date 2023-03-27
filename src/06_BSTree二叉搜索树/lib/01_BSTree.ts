@@ -1,17 +1,24 @@
 import { btPrint } from 'hy-algokit'
 
 import { Node } from '../../00_types/Node'
-class TressNode<T> extends Node<T> {
-  left: TressNode<T> | null = null
-  right: TressNode<T> | null = null
+class TreeNode<T> extends Node<T> {
+  left: TreeNode<T> | null = null
+  right: TreeNode<T> | null = null
+  parent: TreeNode<T> | null = null
+  get isLeft() {
+    return this.parent?.left === this
+  }
+  get isRight() {
+    return this.parent?.right === this
+  }
 }
 
 export class BSTree<T> {
-  root: TressNode<T> | null = null
+  root: TreeNode<T> | null = null
 
   insert(value: T) {
     if (!this.root) {
-      this.root = new TressNode(value)
+      this.root = new TreeNode(value)
     } else {
       this.insertNode(value, this.root)
     }
@@ -21,16 +28,16 @@ export class BSTree<T> {
     btPrint(this.root)
   }
 
-  private insertNode(value: T, node: TressNode<T>) {
+  private insertNode(value: T, node: TreeNode<T>) {
     if (value < node.value) {
       if (!node.left) {
-        node.left = new TressNode(value)
+        node.left = new TreeNode(value)
       } else {
         this.insertNode(value, node.left)
       }
     } else {
       if (!node.right) {
-        node.right = new TressNode(value)
+        node.right = new TreeNode(value)
       } else {
         this.insertNode(value, node.right)
       }
@@ -42,7 +49,7 @@ export class BSTree<T> {
     this.preOrderTraverseNode(this.root)
   }
 
-  private preOrderTraverseNode(node: TressNode<T> | null) {
+  private preOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       console.log(node?.value)
       this.preOrderTraverseNode(node.left)
@@ -55,7 +62,7 @@ export class BSTree<T> {
     this.inOrderTraverseNode(this.root)
   }
 
-  private inOrderTraverseNode(node: TressNode<T> | null) {
+  private inOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       this.inOrderTraverseNode(node.left)
       console.log(node.value)
@@ -68,7 +75,7 @@ export class BSTree<T> {
     this.postOrderTraverseNode(this.root)
   }
 
-  private postOrderTraverseNode(node: TressNode<T> | null) {
+  private postOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       this.postOrderTraverseNode(node.left)
       this.postOrderTraverseNode(node.right)
@@ -82,37 +89,157 @@ export class BSTree<T> {
       return
     }
 
-    const queue: TressNode<T>[] = [this.root]
+    const queue: TreeNode<T>[] = [this.root]
     while (queue.length) {
       const currentNode = queue.shift()!
       console.log(currentNode.value)
-      if(currentNode.left) queue.push(currentNode.left)
-      if(currentNode.right) queue.push(currentNode.right)
+      if (currentNode.left) queue.push(currentNode.left)
+      if (currentNode.right) queue.push(currentNode.right)
     }
-  }  
+  }
 
   // 获取最大值
-  getMaxValue() : T | null{
+  getMaxValue(): T | null {
     let current = this.root
 
-    while(current && current.right){
+    while (current && current.right) {
       current = current.right
     }
 
     return current?.value ?? null
   }
   // 获取最小值
-  getMinValue() : T | null{
+  getMinValue(): T | null {
     let current = this.root
 
-    while(current && current.left){
+    while (current && current.left) {
       current = current.left
     }
 
     return current?.value ?? null
   }
 
-  
+  // 搜索节点
+  searchNode(value: T): TreeNode<T> | null {
+    let parentNode: TreeNode<T> | null = null
+    let currenNode: TreeNode<T> | null = this.root
+
+    while (currenNode) {
+      if (currenNode.value === value) {
+        currenNode.parent = parentNode
+        return currenNode
+      } else if (value < currenNode.value) {
+        parentNode = currenNode
+        currenNode = currenNode.left
+      } else if (value > currenNode.value) {
+        parentNode = currenNode
+        currenNode = currenNode.right
+      }
+    }
+
+    return null
+  }
+
+  // 搜索
+  search(value: T): boolean {
+    return !!this.searchNode(value)?.value
+  }
+
+  // 删除
+  remove(value: T): boolean {
+    let currenNode: TreeNode<T> | null = this.searchNode(value)
+
+    if (!currenNode) return false
+
+    // 1.删除节点是叶子结点
+    if (currenNode.left === null && currenNode.right === null) {
+      if (currenNode === this.root) {
+        this.root = null
+      } else if (currenNode.isLeft) {
+        currenNode.parent!.left = null
+      } else if (currenNode.isRight) {
+        currenNode.parent!.right = null
+      }
+    }
+
+    // 2.删除节点只有一个节点
+    // 2.1删除节点只有一个左子节点
+    else if (currenNode.left !== null && currenNode.right === null) {
+      // 2.1.1当前节点为根节点
+      if (currenNode === this.root) {
+        this.root = currenNode.left
+      }
+      // 2.1.2当前节点为父节点的左子节点
+      else if (currenNode.isLeft) {
+        currenNode.parent!.left = currenNode.left
+      }
+      // 2.1.3当前节点为父节点的右子节点
+      else {
+        currenNode.parent!.right = currenNode.left
+      }
+    }
+    // 2.2删除节点只有一个右子节点
+    else if (currenNode.right !== null && currenNode.left === null) {
+      // 2.2.1当前节点为根节点
+      if (currenNode === this.root) {
+        this.root = currenNode.right
+      }
+      // 2.2.2当前节点为父节点的左子节点
+      else if (currenNode.isLeft) {
+        currenNode.parent!.left = currenNode.right
+      }
+      // 2.1.3当前节点为父节点的右子节点
+      else if (currenNode.isRight) {
+        currenNode.parent!.right = currenNode.right
+      }
+    }
+
+    // 3.删除的节点有两个自节点
+    // 思路: 将删除节点作为根, 找到这棵子树中的一个节点, 替换要删除节点的位置
+    // 寻找替换节点原则: 去找前驱节点 或者 后继节点
+    // 前驱节点: 比当前小一点点的子节点 => 当前节点左子树最大的节点
+    // 后继节点: 比当前大一点点的子节点 => 当前节点右子树最小的节点
+    else {
+      const successor = this.getSuccessor(currenNode)
+      // 3.1当前节点为根节点
+      if(currenNode === this.root){
+        this.root = successor
+      }
+      // 3.2当前节点为父节点的左子节点
+      else if(currenNode.isLeft){
+        currenNode.parent!.left = successor
+      }
+      // 3.3当前节点为父节点的右子节点
+      else{
+        currenNode.parent!.right = successor
+      }
+    }
+
+    return true
+  }
+
+  // 获取后继节点
+  private getSuccessor(delNode: TreeNode<T>): TreeNode<T> {
+    let currentNode: TreeNode<T> | null = delNode.right
+    let successor: TreeNode<T> | null = null
+
+    while (currentNode) {
+      successor = currentNode
+      currentNode = currentNode.left
+      if(currentNode){
+        currentNode.parent = successor
+      }
+    }
+
+    if(successor !== delNode.right){
+      successor!.parent!.left = successor!.right 
+      successor!.right = delNode.right
+    }
+
+    // 删除节点的left, 赋值给后继节点的left
+    successor!.left = delNode.left
+    return successor!
+  }
 }
 
 const bstree = new BSTree<number>()
@@ -133,7 +260,31 @@ bstree.insert(18)
 bstree.insert(25)
 bstree.insert(6)
 
-bstree.print()
+// console.log(bstree.search(20))
+// console.log(bstree.search(2))
+// console.log(bstree.search(10))
+// console.log(bstree.search(14))
+// bstree.print()
 
-console.log(bstree.getMaxValue())
-console.log(bstree.getMinValue())
+// bstree.remove(3)
+// bstree.remove(8)
+// bstree.remove(12)
+// bstree.remove(6)
+// bstree.remove(10)
+// bstree.remove(25)
+// bstree.print()
+
+// bstree.remove(20)
+// bstree.print()
+// bstree.remove(13)
+// console.log('删除13后⬇️')
+// bstree.print()
+
+// bstree.print()
+// bstree.remove(7)
+// bstree.print()
+bstree.insert(19)
+bstree.print()
+bstree.remove(15)
+
+bstree.print()

@@ -29,4 +29,21 @@ describe('BSTree', () => {
       expect(bstree.root?.right?.right?.value).toBe(9);
     });
   });
+
+  // describe('preOrderTraverse', () => {
+  //   it('should traverse nodes in the correct order', () => {
+  //     bstree.insert(5);
+  //     bstree.insert(3);
+  //     bstree.insert(7);
+  //     bstree.insert(1);
+  //     bstree.insert(9);
+
+  //     const values: number[] = [];
+
+  //     bstree.preOrderTraverse();
+
+  //     expect(values).toEqual([5, 3, 1, 7, 9]);
+  //   })
+  // })
+
 });
