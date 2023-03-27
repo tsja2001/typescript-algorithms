@@ -37,23 +37,3 @@ export class BSTree<T> {
     }
   }
 }
-
-const bstree = new BSTree<number>()
-
-bstree.insert(11)
-bstree.insert(7)
-bstree.insert(15)
-bstree.insert(5)
-bstree.insert(3)
-bstree.insert(9)
-bstree.insert(8)
-bstree.insert(10)
-bstree.insert(13)
-bstree.insert(12)
-bstree.insert(14)
-bstree.insert(20)
-bstree.insert(18)
-bstree.insert(25)
-bstree.insert(6)
-
-bstree.print()
