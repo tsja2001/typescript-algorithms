@@ -231,31 +231,14 @@ bstree.insert(18)
 bstree.insert(25)
 bstree.insert(6)
 
-// console.log(bstree.search(20))
-// console.log(bstree.search(2))
-// console.log(bstree.search(10))
-// console.log(bstree.search(14))
-// bstree.print()
-
-// bstree.remove(3)
-// bstree.remove(8)
-// bstree.remove(12)
-// bstree.remove(6)
-// bstree.remove(10)
-// bstree.remove(25)
-// bstree.print()
-
-// bstree.remove(20)
-// bstree.print()
-// bstree.remove(13)
-// console.log('删除13后⬇️')
-// bstree.print()
-
-// bstree.print()
-// bstree.remove(7)
-// bstree.print()
+// successor !== delNode.right情况
 bstree.insert(19)
 bstree.print()
 bstree.remove(15)
-
 bstree.print()
+
+// successor === delNode.right情况
+// bstree.remove(18)
+// bstree.print()
+// bstree.remove(15)
+// bstree.print()
