@@ -48,16 +48,18 @@ export class Graph<T> {
       const vertex = queue.shift()!
       console.log(vertex)
 
+      // 找到当前节点的邻居节点
       const naberhood = this.adjList.get(vertex)
+      if (!naberhood) continue
 
-      // 遍历他的所有邻居
-      naberhood?.forEach((nab) => {
-        // 此节点如果没有被遍历过, 则将此节点添加到队列中
-        if (!visited.has(nab)) {
-          visited.add(nab)
-          queue.push(nab)
+      for(let i = 0; i < naberhood.length; i++) {
+        const currentNaber = naberhood[i]
+        // 如果当前邻居节点未遍历, 将其入队
+        if (!visited.has(currentNaber)) {
+          queue.push(currentNaber)
+          visited.add(currentNaber)
         }
-      })
+      }
     }
   }
 
@@ -74,7 +76,6 @@ export class Graph<T> {
     visited.add(this.verteces[0])
 
     while (stack.length) {
-      // 从要遍历的节点中, 出栈一个
       const vertex = stack.pop()!
       console.log(vertex)
 
@@ -118,5 +119,5 @@ graph.addEdge('B', 'F')
 graph.addEdge('E', 'I')
 
 graph.traverse()
-// graph.gfs()
-graph.dfs()
+graph.gfs()
+// graph.dfs()
