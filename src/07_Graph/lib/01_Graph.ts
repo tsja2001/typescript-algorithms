@@ -25,7 +25,6 @@ export class Graph<T> {
   }
 
   traverse() {
-    console.log('Graph:')
     this.verteces.forEach((vertex) => {
       const edges = this.adjList.get(vertex)
       console.log(`${vertex} => ${edges?.join(' ')}`)
@@ -52,7 +51,7 @@ export class Graph<T> {
       const naberhood = this.adjList.get(vertex)
       if (!naberhood) continue
 
-      for(let i = 0; i < naberhood.length; i++) {
+      for (let i = 0; i < naberhood.length; i++) {
         const currentNaber = naberhood[i]
         // 如果当前邻居节点未遍历, 将其入队
         if (!visited.has(currentNaber)) {
@@ -96,28 +95,37 @@ export class Graph<T> {
 }
 
 const graph = new Graph()
+graph.addVertex(1)
+graph.addVertex(2)
+graph.addVertex(3)
+graph.addVertex(4)
+graph.addVertex(5)
+graph.addEdge(1, 2)
+graph.addEdge(1, 3)
+graph.addEdge(2, 4)
+graph.addEdge(3, 5)
 
-graph.addVertex('A')
-graph.addVertex('B')
-graph.addVertex('C')
-graph.addVertex('D')
-graph.addVertex('E')
-graph.addVertex('F')
-graph.addVertex('G')
-graph.addVertex('H')
-graph.addVertex('I')
+// graph.addVertex('A')
+// graph.addVertex('B')
+// graph.addVertex('C')
+// graph.addVertex('D')
+// graph.addVertex('E')
+// graph.addVertex('F')
+// graph.addVertex('G')
+// graph.addVertex('H')
+// graph.addVertex('I')
 
-graph.addEdge('A', 'B')
-graph.addEdge('A', 'C')
-graph.addEdge('A', 'D')
-graph.addEdge('C', 'D')
-graph.addEdge('C', 'G')
-graph.addEdge('D', 'G')
-graph.addEdge('D', 'H')
-graph.addEdge('B', 'E')
-graph.addEdge('B', 'F')
-graph.addEdge('E', 'I')
+// graph.addEdge('A', 'B')
+// graph.addEdge('A', 'C')
+// graph.addEdge('A', 'D')
+// graph.addEdge('C', 'D')
+// graph.addEdge('C', 'G')
+// graph.addEdge('D', 'G')
+// graph.addEdge('D', 'H')
+// graph.addEdge('B', 'E')
+// graph.addEdge('B', 'F')
+// graph.addEdge('E', 'I')
 
 graph.traverse()
-graph.gfs()
-// graph.dfs()
+// graph.gfs()
+graph.dfs()
