@@ -1,6 +1,6 @@
 import { IList } from '@src/00_types/IList'
 
-class Node<T> {
+export class Node<T> {
   value: T
   next: Node<T> | null = null
   constructor(val: T) {
@@ -9,8 +9,8 @@ class Node<T> {
 }
 
 export interface ILinkedList<T> extends IList<T> {
-  get length(): number
-  get head(): Node<T> | null
+  // get length(): number
+  // get head(): Node<T> | null
   append(value: T): void
   traverse(): void
   insert(value: T, position: number): boolean
