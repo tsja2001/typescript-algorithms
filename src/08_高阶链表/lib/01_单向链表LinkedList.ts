@@ -8,11 +8,10 @@ export class Node<T> {
 }
 
 export class LinkedList<T> implements ILinkedList<T> {
-  // protected属性修饰符: 继承自己的类可以访问到
+  // 重构: protected属性修饰符: 继承自己的类可以访问到
   protected length: number = 0
   protected head: Node<T> | null = null
-
-  // 新增属性 指向链表尾部
+  // 重构: 新增属性 指向链表尾部
   protected tail: Node<T> | null = null
 
   size() {
@@ -38,7 +37,12 @@ export class LinkedList<T> implements ILinkedList<T> {
     return currentNode ?? null
   }
 
-  // 向链表中追加元素
+  // 重构 判断是否为最后一个节点
+  private isTail(node: Node<T>): boolean {
+    return node === this.tail
+  }
+
+  // 向链表中追加元素 重构
   append(value: T) {
     const newNode = new Node(value)
 
@@ -60,7 +64,16 @@ export class LinkedList<T> implements ILinkedList<T> {
 
     while (current) {
       values.push(current.value)
-      current = current.next
+      if (this.isTail(current)) {
+        current = null
+      } else {
+        current = current.next
+      }
+    }
+
+    // 如果是循环链表, 多打印个一个头
+    if (this.head && this.head === this.tail?.next) {
+      values.push(this.head.value)
     }
 
     console.log(values.join(' -> '))
@@ -89,7 +102,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       newNode.next = previous?.next ?? null
       previous!.next = newNode
 
-      // 只有向最后一个位置插入时(类似append操作), 需要考虑tail指向
+      // 重构 只有向最后一个位置插入时(类似append操作), 需要考虑tail指向
       if (position === this.length) {
         this.tail = newNode
       }
@@ -185,9 +198,13 @@ export class LinkedList<T> implements ILinkedList<T> {
         return index
       }
 
-      index++
+      if (this.isTail(currentNode)) {
+        currentNode = null
+      } else {
+        currentNode = currentNode.next
+      }
 
-      currentNode = currentNode.next
+      index++
     }
 
     return -1
@@ -196,11 +213,6 @@ export class LinkedList<T> implements ILinkedList<T> {
   // 判断节点是否为空
   isEmpty(): boolean {
     return this.length === 0
-  }
-
-  // 判断节点是否是最后一个
-  private isTail(node: Node<T>) {
-    return this.tail === node
   }
 }
 
