@@ -53,10 +53,8 @@ export class DoublyLinkedList<T> extends LinkedList<T> {
     if (position < 0 || position > this.length) return false
     else if (position === 0) {
       this.prepend(value)
-      return true
     } else if (position === this.length) {
       this.append(value)
-      return true
     } else {
       const newNode = new DoublyNode(value)
       const currentNode = this.getNode(position)! as DoublyNode<T>
@@ -65,8 +63,48 @@ export class DoublyLinkedList<T> extends LinkedList<T> {
       currentNode.prev!.next = newNode
       currentNode.prev = newNode
       this.length++
-      return true
     }
+    return true
+  }
+
+  // 根据索引删除元素
+  removeAt(position: number, showLog?: boolean): T | null {
+    let removedValue: T | null = null
+    if (position < 0 || position >= this.length) return null
+		// 删除第一个
+    else if (position === 0) {
+			removedValue = this.head!.value
+
+      if (this.length === 1) {
+        this.head = null
+        this.tail = null
+      } else {
+        this.head!.next!.prev = null
+        this.head = this.head!.next
+      }
+    } 
+		// 删除最后一个
+		else if (position === this.length - 1) {
+			removedValue = this.tail!.value
+			this.tail!.prev!.next = null
+			this.tail = this.tail!.prev
+    }
+		// 删除中间一个
+		else {
+			let currentNode = this.head
+			let index = 0
+			while(index < position){
+				currentNode = currentNode!.next
+				index++
+			}
+
+			removedValue = currentNode!.value
+			currentNode!.prev!.next = currentNode!.next
+			currentNode!.next!.prev = currentNode!.prev
+		}
+
+		this.length --
+		return removedValue
   }
 }
 
