@@ -1,11 +1,4 @@
-import { ILinkedList } from '../types/ILinkedList'
-export class Node<T> {
-  value: T
-  next: Node<T> | null = null
-  constructor(val: T) {
-    this.value = val
-  }
-}
+import { ILinkedList, Node } from '../types/ILinkedList'
 
 export class LinkedList<T> implements ILinkedList<T> {
   // 重构: protected属性修饰符: 继承自己的类可以访问到
