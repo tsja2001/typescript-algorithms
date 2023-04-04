@@ -15,7 +15,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     return this.head?.value
   }
 
-  private getNode(position: number): Node<T> | null {
+  protected getNode(position: number): Node<T> | null {
     let currentNode = this.head
 
     if (position < 0 || position > this.length - 1) {
