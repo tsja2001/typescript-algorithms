@@ -14,7 +14,7 @@ pnpm install
 pnpm node src/01_Stack/lib/01_创建stack.ts
 ```
 
-### 册书
+### 测试
 ```bash
 pnpm jest
 ```
