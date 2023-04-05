@@ -1,3 +1,5 @@
+import { cbtPrint } from "hy-algokit"
+
 export class Heap<T> {
   data: T[] = []
   // 标识是否为最大堆
@@ -85,6 +87,11 @@ export class Heap<T> {
     }
   }
 
+  // 打印
+  print(){
+    cbtPrint(this.data)
+  }
+
   peek(): T | undefined {
     return this.data[0]
   }
@@ -116,12 +123,16 @@ export class Heap<T> {
   }
 }
 
-// const heap = new Heap<number>(
-//   [19, 100, 36, 17, 3, 25],
-//   false
-// )
+const arr = [19, 100, 36, 17, 3, 25]
 
-// console.log(heap.data)
+const heap = new Heap<number>(
+  arr,
+  false
+)
+console.log(heap.data)
+console.log(arr === heap.data)
+cbtPrint(arr)
+
 // const heap = new Heap<number>([], false)
 // const arr = [19, 100, 36, 17, 3, 25]
 // arr.forEach((item) => {
