@@ -21,39 +21,17 @@ export class Heap<T> {
     this.data[j] = temp
   }
 
-  insert1(value: T) {
-    this.length++
-    if (this.length === 0) {
-      this.data[0] = value
-    } else {
-      this.data.push(value)
-      let currentIndex = this.length - 1
-      let parentIndex = Math.floor((currentIndex - 1) / 2)
-      while (parentIndex >= 0) {
-        // 父节点小于子节点, 交换
-        if (this.data[parentIndex] < this.data[currentIndex]) {
-          console.log('swap')
-          this.swap(parentIndex, currentIndex)
-          currentIndex = parentIndex
-          parentIndex = Math.floor((currentIndex - 1) / 2)
-          console.log(currentIndex)
-        } else {
-          // continue
-          return
-        }
-      }
-    }
-  }
   insert(value: T) {
     // 将元素插入尾部
     this.length++
     this.data.push(value)
-    
+
     // 上滤操作, 保持最大堆的特性
     this.heapify_up()
   }
 
-  heapify_up() {
+  // 上滤操作
+  private heapify_up() {
     let index = this.length - 1
     while (index > 0) {
       // 父节点小于子节点, 交换
@@ -66,8 +44,49 @@ export class Heap<T> {
     }
   }
 
+  // 提取(大根堆->提取最大值)
   extract(): T | undefined {
-    return undefined
+    if (this.length === 0) {
+      return undefined
+    }
+    // 1. 只有一个元素, 直接提取并返回
+    if (this.length === 1) {
+      this.length--
+      return this.data.pop()!
+    }
+
+    // 2. 提取并返回最大值
+    const resValue = this.data[0]
+    this.data[0] = this.data.pop()!
+    this.length--
+
+    // 3. 下滤操作
+    this.heapify_down()
+    return resValue
+  }
+
+  // 下滤操作
+  private heapify_down() {
+    // 1. 定义当前索引位置
+    let index = 0
+
+    while (index * 2 + 1 < this.length) {
+      // 2. 找到左右子节点
+      const leftChildIndex = index * 2 + 1
+      const rightChildIndex = index * 2 + 2
+      // 3. 找到左右子节点中比较大的值
+      let largerIndex = leftChildIndex
+      if (rightChildIndex < this.length && this.data[rightChildIndex] > this.data[leftChildIndex]) {
+        largerIndex = rightChildIndex
+      }
+      // 4. 比较较大的值和index位置谁大
+      if (this.data[largerIndex] < this.data[index]) {
+        break
+      }
+      // 5. 交换位置
+      this.swap(index, largerIndex)
+      index = largerIndex
+    }
   }
 
   peek(): T | undefined {
@@ -86,16 +105,11 @@ export class Heap<T> {
 }
 
 const heap = new Heap<number>()
-// heap.insert(0)
-// heap.insert(2)
-// heap.insert(4)
-// heap.insert(4)
-// heap.insert(3)
 
 const arr = [19, 100, 36, 17, 3, 25, 1, 2, 7]
 arr.forEach((item) => {
   heap.insert(item)
 })
-// heap.insert(133)
 
 console.log(heap.data)
+console.log(heap.extract())
