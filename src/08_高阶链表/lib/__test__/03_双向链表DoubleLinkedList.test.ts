@@ -1,4 +1,4 @@
-import { DoublyLinkedList } from '../../lib/03_双向链表DoubleLinkedList'
+import { DoublyLinkedList } from '../03_双向链表DoubleLinkedList'
 
 describe('LinkedList', () => {
   let dLinkedList: DoublyLinkedList<string>
