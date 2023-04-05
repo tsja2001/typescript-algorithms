@@ -1,19 +1,10 @@
-// import { Node } from '../../00_types/Node'
-// class TreeNode<T> extends Node<T> {
-//   left: TreeNode<T> | null = null
-//   right: TreeNode<T> | null = null
-//   parent: TreeNode<T> | null = null
-//   get isLeft() {
-//     return this.parent?.left === this
-//   }
-//   get isRight() {
-//     return this.parent?.right === this
-//   }
-// }
-
 export class Heap<T> {
   data: T[] = []
   private length: number = 0
+
+  constructor(arr: T[] = []){
+    this.build_heap(arr)
+  }
 
   private swap(i: number, j: number) {
     const temp = this.data[i]
@@ -61,15 +52,13 @@ export class Heap<T> {
     this.length--
 
     // 3. 下滤操作
-    this.heapify_down()
+    this.heapify_down(0)
     return resValue
   }
 
   // 下滤操作
-  private heapify_down() {
+  private heapify_down(index: number) {
     // 1. 定义当前索引位置
-    let index = 0
-
     while (index * 2 + 1 < this.length) {
       // 2. 找到左右子节点
       const leftChildIndex = index * 2 + 1
@@ -101,15 +90,25 @@ export class Heap<T> {
     return this.length === 0
   }
 
-  buildHeap(arr: T[]) {}
+  build_heap(arr: T[]) {
+    this.data = arr
+    this.length = arr.length
+
+    let start = Math.floor((this.length - 1) / 2)
+    for(let i = start; i >= 0; i--){
+      this.heapify_down(i)
+    }
+  }
 }
 
-const heap = new Heap<number>()
-
-const arr = [19, 100, 36, 17, 3, 25, 1, 2, 7]
-arr.forEach((item) => {
-  heap.insert(item)
-})
+const heap = new Heap<number>([19, 100, 36, 17, 3, 25, 1, 2, 7])
 
 console.log(heap.data)
-console.log(heap.extract())
+
+// const arr = [19, 100, 36, 17, 3, 25, 1, 2, 7]
+// arr.forEach((item) => {
+//   heap.insert(item)
+// })
+
+// console.log(heap.data)
+// console.log(heap.extract())

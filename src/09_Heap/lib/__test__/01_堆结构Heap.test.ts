@@ -29,4 +29,12 @@ describe('Heap', () => {
       expect(heap.data).toEqual([25, 19, 7, 17, 3, 2, 1])
     })
   })
+
+  describe('build_heap', () => {
+    test('build_heap test', () => {
+      const arr = [19, 100, 36, 17, 3, 25, 1, 2, 7]
+      heap.build_heap(arr)
+      expect(heap.data).toEqual([100, 19, 36, 17, 3, 25, 1, 2, 7])
+    })
+  })
 })
