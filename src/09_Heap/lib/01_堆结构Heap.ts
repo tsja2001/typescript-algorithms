@@ -1,8 +1,12 @@
 export class Heap<T> {
   data: T[] = []
+  // 标识是否为最大堆
+  isMax: boolean = true
   private length: number = 0
 
-  constructor(arr: T[] = []){
+  constructor(arr: T[] = [], isMax: boolean = true) {
+    this.isMax = isMax
+    if (arr.length === 0) return
     this.build_heap(arr)
   }
 
@@ -27,7 +31,7 @@ export class Heap<T> {
     while (index > 0) {
       // 父节点小于子节点, 交换
       let parentIndex = Math.floor((index - 1) / 2)
-      if (this.data[index] <= this.data[parentIndex]) {
+      if (this.compare(parentIndex, index)) {
         break
       }
       this.swap(index, parentIndex)
@@ -65,11 +69,14 @@ export class Heap<T> {
       const rightChildIndex = index * 2 + 2
       // 3. 找到左右子节点中比较大的值
       let largerIndex = leftChildIndex
-      if (rightChildIndex < this.length && this.data[rightChildIndex] > this.data[leftChildIndex]) {
+      if (
+        rightChildIndex < this.length &&
+        this.compare(rightChildIndex, leftChildIndex) 
+      ) {
         largerIndex = rightChildIndex
       }
       // 4. 比较较大的值和index位置谁大
-      if (this.data[largerIndex] < this.data[index]) {
+      if (this.compare(index, largerIndex)) {
         break
       }
       // 5. 交换位置
@@ -95,17 +102,28 @@ export class Heap<T> {
     this.length = arr.length
 
     let start = Math.floor((this.length - 1) / 2)
-    for(let i = start; i >= 0; i--){
+    for (let i = start; i >= 0; i--) {
       this.heapify_down(i)
+    }
+  }
+
+  private compare(i: number, j: number): boolean {
+    if (this.isMax) {
+      return this.data[i] >= this.data[j]
+    } else {
+      return this.data[i] <= this.data[j]
     }
   }
 }
 
-const heap = new Heap<number>([19, 100, 36, 17, 3, 25, 1, 2, 7])
+const heap = new Heap<number>(
+  [19, 100, 36, 17, 3, 25],
+  false
+)
 
 console.log(heap.data)
-
-// const arr = [19, 100, 36, 17, 3, 25, 1, 2, 7]
+// const heap = new Heap<number>([], false)
+// const arr = [19, 100, 36, 17, 3, 25]
 // arr.forEach((item) => {
 //   heap.insert(item)
 // })
