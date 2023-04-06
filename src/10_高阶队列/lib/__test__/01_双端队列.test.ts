@@ -10,6 +10,7 @@ describe('ArrayDeque', () => {
 			arrayDeque.addFront('a')
 			arrayDeque.addFront('b')
 			arrayDeque.addFront('c')
+			debugger
 			expect(arrayDeque.traverse()).toEqual(['c', 'b', 'a'])
 		})
 	})

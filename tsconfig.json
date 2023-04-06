@@ -7,8 +7,8 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
-      "@stack/*": ["src/01_Stack/*"],
+      // "@src/*": ["src/*"],
+      // "@stack/*": ["src/01_Stack/*"],
     }
   },
   "include": ["./src/**/*"],

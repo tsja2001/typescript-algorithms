@@ -1,4 +1,4 @@
-import { IList } from '@src/00_types/IList'
+import { IList } from '../../../src/00_types/IList'
 
 class Node<T> {
   value: T
