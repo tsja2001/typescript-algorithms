@@ -66,7 +66,36 @@ export class AVLTreeNode<T> extends TreeNode<T> {
   }
 
   // 左旋转
-  leftRotation() {}
+  leftRotation1() {
+    const isLeft = this.isLeft
+    const isRight = this.isRight
+
+    // 处理pivot
+    const pivot = this.right!
+    if (this.parent) {
+      pivot.parent = this.parent
+    }
+
+    // 处理pivot的left
+    this.right = pivot.left
+    if (pivot.left) {
+      pivot.left.parent = this
+    }
+
+    // 处理root(this)
+    pivot.left = this
+    this.parent = pivot
+
+    if (!pivot.parent) {
+      return pivot
+    } else if (isLeft) {
+      pivot.parent.left = pivot
+    } else if (isRight) {
+      pivot.parent.right = pivot
+    }
+
+    return pivot
+  }
 }
 
 const avlNode0 = new AVLTreeNode(1)
@@ -74,15 +103,15 @@ const avlNode1 = new AVLTreeNode(2)
 const avlNode2 = new AVLTreeNode(3)
 const avlNode3 = new AVLTreeNode(4)
 
-avlNode0.left = avlNode1
+avlNode0.right = avlNode1
 avlNode1.parent = avlNode0
-avlNode1.left = avlNode2
+avlNode1.right = avlNode2
 avlNode2.parent = avlNode1
-avlNode2.left = avlNode3
+avlNode2.right = avlNode3
 avlNode3.parent = avlNode2
 
 btPrint(avlNode0)
 
-avlNode1.rightRotation()
+avlNode1.leftRotation()
 
 btPrint(avlNode0)
