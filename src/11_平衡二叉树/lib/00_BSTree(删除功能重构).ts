@@ -16,9 +16,18 @@ export class TreeNode<T> extends Node<T> {
 export class BSTree<T> {
   root: TreeNode<T> | null = null
 
+  /**
+   * 由于之后会有其他类继承此类, 会创建不同的节点类型. 
+   * 因此将创建节点封装成一个方法, 继承的类可以重写次方法
+   * 例如: AVLTree
+   */
+  protected createNode(value: T): TreeNode<T> {
+    return new TreeNode(value)
+  }
+
   insert(value: T) {
     if (!this.root) {
-      this.root = new TreeNode(value)
+      this.root = this.createNode(value)
     } else {
       this.insertNode(value, this.root)
     }
@@ -32,12 +41,14 @@ export class BSTree<T> {
     if (value < node.value) {
       if (!node.left) {
         node.left = new TreeNode(value)
+        node.left.parent = node
       } else {
         this.insertNode(value, node.left)
       }
     } else {
       if (!node.right) {
         node.right = new TreeNode(value)
+        node.right.parent = node
       } else {
         this.insertNode(value, node.right)
       }
@@ -178,11 +189,11 @@ export class BSTree<T> {
       replaceNode = successor
     }
 
-    if(currenNode === this.root){
+    if (currenNode === this.root) {
       this.root = replaceNode
-    }else if(currenNode.isLeft){
+    } else if (currenNode.isLeft) {
       currenNode.parent!.left = replaceNode
-    }else if(currenNode.isRight){
+    } else if (currenNode.isRight) {
       currenNode.parent!.right = replaceNode
     }
 
@@ -215,27 +226,27 @@ export class BSTree<T> {
 
 const bstree = new BSTree<number>()
 
-bstree.insert(11)
-bstree.insert(7)
-bstree.insert(15)
-bstree.insert(5)
-bstree.insert(3)
-bstree.insert(9)
-bstree.insert(8)
-bstree.insert(10)
-bstree.insert(13)
-bstree.insert(12)
-bstree.insert(14)
-bstree.insert(20)
-bstree.insert(18)
-bstree.insert(25)
-bstree.insert(6)
+// bstree.insert(11)
+// bstree.insert(7)
+// bstree.insert(15)
+// bstree.insert(5)
+// bstree.insert(3)
+// bstree.insert(9)
+// bstree.insert(8)
+// bstree.insert(10)
+// bstree.insert(13)
+// bstree.insert(12)
+// bstree.insert(14)
+// bstree.insert(20)
+// bstree.insert(18)
+// bstree.insert(25)
+// bstree.insert(6)
 
 // successor !== delNode.right情况
-bstree.insert(19)
-bstree.print()
-bstree.remove(15)
-bstree.print()
+// bstree.insert(19)
+// bstree.print()
+// bstree.remove(15)
+// bstree.print()
 
 // successor === delNode.right情况
 // bstree.remove(18)
