@@ -1,6 +1,6 @@
 import { IQueue } from '../types/IQueue';
 export class Queue<T> implements IQueue<T>{
-	private data: T[] = []
+	protected data: T[] = []
 
 	enQuque (elememt: T) {
 		this.data.push(elememt)
@@ -16,6 +16,9 @@ export class Queue<T> implements IQueue<T>{
 	};
 	size(){
 		return this.data.length
+	}
+	traverse(){
+		return this.data
 	}
 }
 
