@@ -4,6 +4,10 @@
 
 ### 此次学习用于复习算法. 部分重复代码, 在[Javascript_Data_Structures_And_Algorithms](https://github.com/tsja2001/Javascript_Data_Structures_And_Algorithms) 仓库中
 
+
+### 笔记
+[🔗notion](https://rhinestone-duckling-9f2.notion.site/d2425dc0f0454a37b0f3d673bb8068dd)
+
 ### 安装
 ```bash
 pnpm install
