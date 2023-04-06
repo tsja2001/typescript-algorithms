@@ -12,7 +12,7 @@ export class AVLTreeNode<T> extends TreeNode<T> {
     return Math.max(leftHeight, rightHeight) + 1
   }
 
-	// 获取平衡因子
+  // 获取平衡因子
   getBalanceFactor(): number {
     const leftHeight = this.left ? this.left.getHeight() : 0
     const rightHeight = this.right ? this.right.getHeight() : 0
@@ -20,11 +20,20 @@ export class AVLTreeNode<T> extends TreeNode<T> {
     return leftHeight - rightHeight
   }
 
-	// 判断是否平衡
+  // 判断是否平衡
   get isBalanced(): boolean {
     return Math.abs(this.getBalanceFactor()) <= 1
   }
 
-	// 获取更高子节点
-	
+  // 获取更高子节点(左右子树谁高返回谁)
+  public get higherChild(): AVLTreeNode<T> | null {
+    const leftHeight = this.left ? this.left.getHeight() : 0
+    const rightHeight = this.right ? this.right.getHeight() : 0
+
+    if (leftHeight > rightHeight) return this.left
+    if (leftHeight < rightHeight) return this.right
+		
+		// 当左右高度相同时, 按照惯例: 左边高返回左边, 右边高返回右边
+    return this.isLeft ? this.left : this.right
+  }
 }

@@ -17,7 +17,7 @@ describe('AVLTreeNode', () => {
 	})
 
   describe('getBalance', () => {
-		test('balanceFactor test', () => {
+		test('balanceFactor & isBalanced test', () => {
 			expect(avlNode.getBalanceFactor()).toEqual(0)
 			expect(avlNode.isBalanced).toEqual(true)
 			avlNode.right = new AVLTreeNode(11)
@@ -32,6 +32,22 @@ describe('AVLTreeNode', () => {
 			avlNode.left.right = new AVLTreeNode(14)
 			expect(avlNode.getBalanceFactor()).toEqual(0)
 			expect(avlNode.isBalanced).toEqual(true)
+		})
+	})
+
+	describe('higherChild', () => {
+		test('higherChild test', () => {
+			expect(avlNode.higherChild).toEqual(null)
+			avlNode.right = new AVLTreeNode(11)
+			expect(avlNode.higherChild).toEqual(avlNode.right)
+			avlNode.right = new AVLTreeNode(12)
+			expect(avlNode.higherChild).toEqual(avlNode.right)
+			avlNode.left = new AVLTreeNode(13)
+			expect(avlNode.higherChild).toEqual(avlNode.right)
+
+			avlNode.right.left = new AVLTreeNode(14)
+			avlNode.right.parent = avlNode
+			expect(avlNode.right.higherChild).toEqual(avlNode.right)
 		})
 	})
 })
