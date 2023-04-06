@@ -66,7 +66,7 @@ export class AVLTreeNode<T> extends TreeNode<T> {
   }
 
   // 左旋转
-  leftRotation1() {
+  leftRotation() {
     const isLeft = this.isLeft
     const isRight = this.isRight
 
