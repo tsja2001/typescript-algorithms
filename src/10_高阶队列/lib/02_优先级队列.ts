@@ -1,6 +1,8 @@
 import { Heap } from '../../09_Heap/lib/01_堆结构Heap'
 import { PriorityNode } from '../type/PriorityNode'
 
+// 实现方法1: 入队时传入value和priority, 在内部构件节点
+
 export class PriorityQueue<T> {
   private heap: Heap<PriorityNode<T>>
   constructor() {

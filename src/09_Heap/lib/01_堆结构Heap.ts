@@ -116,12 +116,12 @@ export class Heap<T> {
   }
 }
 
-const heap = new Heap<number>(
-  [19, 100, 36, 17, 3, 25],
-  false
-)
+// const heap = new Heap<number>(
+//   [19, 100, 36, 17, 3, 25],
+//   false
+// )
 
-console.log(heap.data)
+// console.log(heap.data)
 // const heap = new Heap<number>([], false)
 // const arr = [19, 100, 36, 17, 3, 25]
 // arr.forEach((item) => {
