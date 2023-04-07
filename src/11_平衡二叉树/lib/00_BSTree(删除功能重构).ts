@@ -29,7 +29,7 @@ export class BSTree<T> {
   /**
    * 检测树是否平衡
    */
-  protected checkBalance(node: TreeNode<T>) {}
+  protected checkBalance(node: TreeNode<T>, isAdd: boolean = true) {}
 
   insert(value: T) {
     const newNode = this.createNode(value)
@@ -201,7 +201,12 @@ export class BSTree<T> {
     // 后继节点: 比当前大一点点的子节点 => 当前节点右子树最小的节点
     else {
       const successor = this.getSuccessor(currenNode)
-      replaceNode = successor
+      // replaceNode = successor
+      currenNode.value = successor.value
+      delNode = successor
+      this.checkBalance(delNode, false)
+
+      return true
     }
 
     if (currenNode === this.root) {
@@ -213,9 +218,11 @@ export class BSTree<T> {
     }
 
     // 保证删掉节点后, 替换上的节点也有父节点
-    if(replaceNode && currenNode.parent){
+    if (replaceNode && currenNode.parent) {
       replaceNode.parent = currenNode.parent
     }
+
+    this.checkBalance(delNode, false)
 
     return true
   }
@@ -235,11 +242,19 @@ export class BSTree<T> {
 
     if (successor !== delNode.right) {
       successor!.parent!.left = successor!.right
-      successor!.right = delNode.right
+      // successor!.right = delNode.right
+      if (successor?.right) {
+        successor.right.parent = successor.parent
+      }
+    } else {
+      delNode.right = successor!.right
+      if (successor!.right) {
+        successor!.right.parent = delNode
+      }
     }
 
     // 删除节点的left, 赋值给后继节点的left
-    successor!.left = delNode.left
+    // successor!.left = delNode.left
     return successor!
   }
 }

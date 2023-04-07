@@ -39,11 +39,18 @@ class AVLTree<T> extends BSTree<T> {
     return new AVLTreeNode<T>(value)
   }
 
-  protected checkBalance(node: AVLTreeNode<T>): void {
+  protected checkBalance(
+    node: AVLTreeNode<T>,
+    isAdd: boolean = true
+  ): void {
     let currenNode = node.parent
     while (currenNode) {
       if (!currenNode.isBalanced) {
         this.rebalance(currenNode)
+        // 完成旋转后,
+        // 如果当前是添加操作, 则不需要继续去找父节点
+        // 如果当前是删除操作, 要一直去判断父节点是否平衡
+        if (isAdd) break
       }
       currenNode = currenNode.parent
     }
@@ -52,14 +59,25 @@ class AVLTree<T> extends BSTree<T> {
 
 const avlTree = new AVLTree<number>()
 
-// avlTree.insert(8)
-// avlTree.insert(10)
-// avlTree.insert(11)
-
-// avlTree.print()
-
-for (let i = 0; i < 30; i++) {
-  avlTree.insert(Math.floor(Math.random() * 100))
-}
+avlTree.insert(8)
+avlTree.insert(10)
+avlTree.insert(11)
+avlTree.insert(12)
+avlTree.insert(13)
+avlTree.insert(14)
+avlTree.insert(15)
+avlTree.insert(16)
+avlTree.insert(17)
+avlTree.insert(18)
 
 avlTree.print()
+
+avlTree.remove(17)
+avlTree.remove(18)
+
+avlTree.print()
+// for (let i = 0; i < 30; i++) {
+//   avlTree.insert(Math.floor(Math.random() * 100))
+// }
+
+// avlTree.print()
