@@ -17,7 +17,7 @@ export class BSTree<T> {
   root: TreeNode<T> | null = null
 
   /**
-   * 由于之后会有其他类继承此类, 会创建不同的节点类型. 
+   * 由于之后会有其他类继承此类, 会创建不同的节点类型.
    * 因此将创建节点封装成一个方法, 继承的类可以重写次方法
    * 例如: AVLTree
    */
@@ -25,32 +25,57 @@ export class BSTree<T> {
     return new TreeNode(value)
   }
 
+  protected checkBalance(node: TreeNode<T>) {}
+
   insert(value: T) {
+    const newNode = this.createNode(value)
+
     if (!this.root) {
-      this.root = this.createNode(value)
+      this.root = newNode
     } else {
-      this.insertNode(value, this.root)
+      // this.insertNode1(value, this.root)
+      this.insertNode(this.root, newNode)
     }
+
+    // this.checkBalance()
   }
 
   print() {
     btPrint(this.root)
   }
 
-  private insertNode(value: T, node: TreeNode<T>) {
+  private insertNode1(value: T, node: TreeNode<T>) {
     if (value < node.value) {
       if (!node.left) {
         node.left = new TreeNode(value)
         node.left.parent = node
       } else {
-        this.insertNode(value, node.left)
+        this.insertNode1(value, node.left)
       }
     } else {
       if (!node.right) {
         node.right = new TreeNode(value)
         node.right.parent = node
       } else {
-        this.insertNode(value, node.right)
+        this.insertNode1(value, node.right)
+      }
+    }
+  }
+
+  private insertNode(node: TreeNode<T>, newNode: TreeNode<T>) {
+    if (newNode.value < node.value) {
+      if (!node.left) {
+        node.left = newNode
+        node.left.parent = node
+      } else {
+        this.insertNode(node.left, newNode)
+      }
+    } else {
+      if (!node.right) {
+        node.right = newNode
+        node.right.parent = node
+      } else {
+        this.insertNode(node.right, newNode)
       }
     }
   }
