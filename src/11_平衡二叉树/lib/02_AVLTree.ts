@@ -38,6 +38,10 @@ class AVLTree<T> extends BSTree<T> {
   protected createNode(value: T): AVLTreeNode<T> {
     return new AVLTreeNode<T>(value)
   }
+
+	protected checkBalance(node: TreeNode<T>): void {
+		console.log('node.value', node.value)
+	}
 }
 
 const avlTree = new AVLTree<number>()

@@ -98,20 +98,20 @@ export class AVLTreeNode<T> extends TreeNode<T> {
   }
 }
 
-const avlNode0 = new AVLTreeNode(1)
-const avlNode1 = new AVLTreeNode(2)
-const avlNode2 = new AVLTreeNode(3)
-const avlNode3 = new AVLTreeNode(4)
+// const avlNode0 = new AVLTreeNode(1)
+// const avlNode1 = new AVLTreeNode(2)
+// const avlNode2 = new AVLTreeNode(3)
+// const avlNode3 = new AVLTreeNode(4)
 
-avlNode0.right = avlNode1
-avlNode1.parent = avlNode0
-avlNode1.right = avlNode2
-avlNode2.parent = avlNode1
-avlNode2.right = avlNode3
-avlNode3.parent = avlNode2
+// avlNode0.right = avlNode1
+// avlNode1.parent = avlNode0
+// avlNode1.right = avlNode2
+// avlNode2.parent = avlNode1
+// avlNode2.right = avlNode3
+// avlNode3.parent = avlNode2
 
-btPrint(avlNode0)
+// btPrint(avlNode0)
 
-avlNode1.leftRotation()
+// avlNode1.leftRotation()
 
-btPrint(avlNode0)
+// btPrint(avlNode0)

@@ -20,11 +20,15 @@ export class BSTree<T> {
    * 由于之后会有其他类继承此类, 会创建不同的节点类型.
    * 因此将创建节点封装成一个方法, 继承的类可以重写次方法
    * 例如: AVLTree
+   * 设计模式: 模板模式
    */
   protected createNode(value: T): TreeNode<T> {
     return new TreeNode(value)
   }
 
+  /**
+   * 检测树是否平衡
+   */
   protected checkBalance(node: TreeNode<T>) {}
 
   insert(value: T) {
@@ -33,33 +37,15 @@ export class BSTree<T> {
     if (!this.root) {
       this.root = newNode
     } else {
-      // this.insertNode1(value, this.root)
       this.insertNode(this.root, newNode)
     }
 
-    // this.checkBalance()
+    // 检测树是否平衡
+    this.checkBalance(newNode)
   }
 
   print() {
     btPrint(this.root)
-  }
-
-  private insertNode1(value: T, node: TreeNode<T>) {
-    if (value < node.value) {
-      if (!node.left) {
-        node.left = new TreeNode(value)
-        node.left.parent = node
-      } else {
-        this.insertNode1(value, node.left)
-      }
-    } else {
-      if (!node.right) {
-        node.right = new TreeNode(value)
-        node.right.parent = node
-      } else {
-        this.insertNode1(value, node.right)
-      }
-    }
   }
 
   private insertNode(node: TreeNode<T>, newNode: TreeNode<T>) {
@@ -249,7 +235,7 @@ export class BSTree<T> {
   }
 }
 
-const bstree = new BSTree<number>()
+// const bstree = new BSTree<number>()
 
 // bstree.insert(11)
 // bstree.insert(7)
