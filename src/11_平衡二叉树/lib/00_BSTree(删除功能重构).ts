@@ -52,14 +52,14 @@ export class BSTree<T> {
     if (newNode.value < node.value) {
       if (!node.left) {
         node.left = newNode
-        node.left.parent = node
+        newNode.parent = node
       } else {
         this.insertNode(node.left, newNode)
       }
     } else {
       if (!node.right) {
         node.right = newNode
-        node.right.parent = node
+        newNode.parent = node
       } else {
         this.insertNode(node.right, newNode)
       }
@@ -173,6 +173,10 @@ export class BSTree<T> {
 
     if (!currenNode) return false
 
+    // 被删除的节点
+    let delNode: TreeNode<T> = currenNode
+
+    // 删除当前节点后, 要被替换上的节点
     let replaceNode: TreeNode<T> | null = null
 
     // 1.删除节点是叶子结点
@@ -206,6 +210,11 @@ export class BSTree<T> {
       currenNode.parent!.left = replaceNode
     } else if (currenNode.isRight) {
       currenNode.parent!.right = replaceNode
+    }
+
+    // 保证删掉节点后, 替换上的节点也有父节点
+    if(replaceNode && currenNode.parent){
+      replaceNode.parent = currenNode.parent
     }
 
     return true

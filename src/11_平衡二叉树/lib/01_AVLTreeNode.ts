@@ -4,7 +4,7 @@ import { TreeNode } from '../types/TreeNode'
 export class AVLTreeNode<T> extends TreeNode<T> {
   left: AVLTreeNode<T> | null = null
   right: AVLTreeNode<T> | null = null
-  parent: TreeNode<T> | null = null
+  parent: AVLTreeNode<T> | null = null
 
   // 获取每个节点
   getHeight(): number {
@@ -42,17 +42,21 @@ export class AVLTreeNode<T> extends TreeNode<T> {
   rightRotation() {
     const isLeft = this.isLeft
     const isRight = this.isRight
+
     // 1. 处理pivot节点(要旋转成为根节点的节点)
     const pivot = this.left!
     pivot.parent = this.parent
+
     // 2. 处理pivot的right
     this.left = pivot.right
     if (pivot.right) {
       pivot.right.parent = this
     }
+
     // 3. 处理this(当前根节点)
     pivot.right = this
     this.parent = pivot
+
     // 4. 挂载pivot
     if (!pivot.parent) {
       return pivot
@@ -72,9 +76,7 @@ export class AVLTreeNode<T> extends TreeNode<T> {
 
     // 处理pivot
     const pivot = this.right!
-    if (this.parent) {
-      pivot.parent = this.parent
-    }
+    pivot.parent = this.parent
 
     // 处理pivot的left
     this.right = pivot.left

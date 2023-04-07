@@ -23,13 +23,13 @@ class AVLTree<T> extends BSTree<T> {
         pivot?.rightRotation()
         resultNode = root.leftRotation()
       }
-      // LR
+      // RR
       else {
         resultNode = root.leftRotation()
       }
     }
 
-    // 判断反悔的pivot是否为有父节点
+    // 判断返回的pivot是否为有父节点
     if (resultNode.parent === null) {
       this.root = resultNode
     }
@@ -39,19 +39,27 @@ class AVLTree<T> extends BSTree<T> {
     return new AVLTreeNode<T>(value)
   }
 
-	protected checkBalance(node: TreeNode<T>): void {
-		console.log('node.value', node.value)
-	}
+  protected checkBalance(node: AVLTreeNode<T>): void {
+    let currenNode = node.parent
+    while (currenNode) {
+      if (!currenNode.isBalanced) {
+        this.rebalance(currenNode)
+      }
+      currenNode = currenNode.parent
+    }
+  }
 }
 
 const avlTree = new AVLTree<number>()
 
-avlTree.insert(11)
-avlTree.insert(22)
-avlTree.insert(33)
-avlTree.insert(10)
-avlTree.insert(9)
-avlTree.insert(7)
-avlTree.insert(8)
+// avlTree.insert(8)
+// avlTree.insert(10)
+// avlTree.insert(11)
+
+// avlTree.print()
+
+for (let i = 0; i < 30; i++) {
+  avlTree.insert(Math.floor(Math.random() * 100))
+}
 
 avlTree.print()
