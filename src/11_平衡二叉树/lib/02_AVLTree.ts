@@ -1,7 +1,8 @@
 import { BSTree, TreeNode } from './00_BSTree(删除功能重构)'
 import { AVLTreeNode } from './01_AVLTreeNode'
 
-class AVLTree<T> extends BSTree<T> {
+export class AVLTree<T> extends BSTree<T> {
+  // root: AVLTreeNode<T> | null = null
   rebalance(root: AVLTreeNode<T>) {
     const pivot = root.higherChild
     const current = pivot?.higherChild
@@ -59,23 +60,45 @@ class AVLTree<T> extends BSTree<T> {
 
 const avlTree = new AVLTree<number>()
 
-avlTree.insert(8)
-avlTree.insert(10)
-avlTree.insert(11)
-avlTree.insert(12)
-avlTree.insert(13)
-avlTree.insert(14)
+avlTree.insert(1)
+avlTree.insert(2)
+avlTree.insert(3)
+avlTree.insert(4)
+avlTree.insert(5)
 avlTree.insert(15)
-avlTree.insert(16)
-avlTree.insert(17)
-avlTree.insert(18)
+avlTree.insert(14)
+avlTree.insert(13)
+avlTree.insert(12)
+avlTree.insert(11)
+avlTree.insert(10)
 
 avlTree.print()
+avlTree.preOrderTraverse()
 
-avlTree.remove(17)
-avlTree.remove(18)
+// avlTree.remove(11)
+// avlTree.remove(10)
+// console.log('remove(11) remove(10)')
+// avlTree.print()
+// avlTree.remove(5)
+// console.log('remove(5)')
+// avlTree.print()
+// avlTree.remove(14)
+// console.log('remove(14)')
+// avlTree.print()
 
+avlTree.remove(11)
+avlTree.remove(15)
 avlTree.print()
+avlTree.insert(3.5)
+console.log('insert(3.5)')
+avlTree.print()
+avlTree.insert(1.5)
+console.log('insert(1.5)')
+avlTree.print()
+avlTree.insert(5.5)
+console.log('insert(5.5)')
+avlTree.print()
+
 // for (let i = 0; i < 30; i++) {
 //   avlTree.insert(Math.floor(Math.random() * 100))
 // }
