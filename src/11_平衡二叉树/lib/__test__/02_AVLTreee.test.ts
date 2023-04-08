@@ -3,222 +3,243 @@ import { AVLTree } from '../02_AVLTree'
 
 describe('AVLTree', () => {
   describe('rebalance', () => {
-    describe('rebalance by self', () => {
-      it('LL', () => {
-        const avlTree = new AVLTree<number>()
-        const root = new AVLTreeNode(3)
-        const pivot = new AVLTreeNode(2)
-        const current = new AVLTreeNode(1)
+    let avlTree: AVLTree<number>
+    let parent: AVLTreeNode<number>
+    let root: AVLTreeNode<number>
+    let pivot: AVLTreeNode<number>
+    let current: AVLTreeNode<number>
 
+    describe('LL', () => {
+      function verifyLLRebalance(
+        tree: AVLTree<number>,
+        root: AVLTreeNode<number>,
+        pivot: AVLTreeNode<number>,
+        current: AVLTreeNode<number>
+      ) {
+        expect(tree.root?.left?.value).toBe(2)
+        expect(tree.root?.left).toBe(pivot)
+
+        expect(tree.root?.left?.left?.value).toBe(1)
+        expect(tree.root?.left?.left).toBe(current)
+        expect(tree.root?.left?.left?.parent).toBe(tree.root?.left)
+
+        expect(tree.root?.left?.right?.value).toBe(3)
+        expect(tree.root?.left?.right).toBe(root)
+        expect(tree.root?.left?.right?.parent).toBe(tree.root?.left)
+      }
+
+      beforeEach(() => {
+        avlTree = new AVLTree<number>()
+        parent = new AVLTreeNode(4)
+        root = new AVLTreeNode(3)
+        pivot = new AVLTreeNode(2)
+        current = new AVLTreeNode(1)
+
+        parent.left = root
+        root.parent = parent
         root.left = pivot
         pivot.parent = root
         pivot.left = current
         current.parent = pivot
 
-        avlTree.root = root
-
-        avlTree.rebalance(root)
-
-        expect(avlTree.root?.value).toBe(2)
-        expect(avlTree.root).toBe(pivot)
-
-        expect(avlTree.root?.left?.value).toBe(1)
-        expect(avlTree.root?.left).toBe(current)
-        expect(avlTree.root?.left?.parent).toBe(avlTree.root)
-
-        expect(avlTree.root?.right?.value).toBe(3)
-        expect(avlTree.root?.right).toBe(root)
-        expect(avlTree.root?.right?.parent).toBe(avlTree.root)
+        avlTree.root = parent
       })
 
-      it('RR', () => {
-        const avlTree = new AVLTree<number>()
-        const root = new AVLTreeNode(1)
-        const pivot = new AVLTreeNode(2)
-        const current = new AVLTreeNode(3)
-
-        root.right = pivot
-        pivot.parent = root
-        pivot.right = current
-        current.parent = pivot
-
-        avlTree.root = root
-
+      it('rebalance', () => {
         avlTree.rebalance(root)
-
-        expect(avlTree.root?.value).toBe(2)
-        expect(avlTree.root).toBe(pivot)
-
-        expect(avlTree.root?.left?.value).toBe(1)
-        expect(avlTree.root?.left).toBe(root)
-        expect(avlTree.root?.left?.parent).toBe(avlTree.root)
-
-        expect(avlTree.root?.right?.value).toBe(3)
-        expect(avlTree.root?.right).toBe(current)
-        expect(avlTree.root?.right?.parent).toBe(avlTree.root)
+        verifyLLRebalance(avlTree, root, pivot, current)
       })
 
-      it('LR', () => {
-        const avlTree = new AVLTree<number>()
-        const root = new AVLTreeNode(3)
-        const pivot = new AVLTreeNode(1)
-        const current = new AVLTreeNode(2)
+      it('checkBalance', () => {
+        avlTree.checkBalance(root.left!)
+        verifyLLRebalance(avlTree, root, pivot, current)
+      })
 
-        root.left = pivot
-        pivot.parent = root
-        pivot.right = current
-        current.parent = pivot
-
-        avlTree.root = root
-
+      it('parent is correct', () => {
         avlTree.rebalance(root)
 
-        expect(avlTree.root?.value).toBe(2)
-        expect(avlTree.root).toBe(current)
-
-        expect(avlTree.root?.left?.value).toBe(1)
+        expect(avlTree.root?.value).toBe(4)
+        expect(avlTree.root).toBe(parent)
+        expect(avlTree.root?.parent).toBeNull()
         expect(avlTree.root?.left).toBe(pivot)
-        expect(avlTree.root?.left?.parent).toBe(avlTree.root)
-
-        expect(avlTree.root?.right?.value).toBe(3)
-        expect(avlTree.root?.right).toBe(root)
-        expect(avlTree.root?.right?.parent).toBe(avlTree.root)
-      })
-
-      it('RL', () => {
-        const avlTree = new AVLTree<number>()
-        const root = new AVLTreeNode(1)
-        const pivot = new AVLTreeNode(3)
-        const current = new AVLTreeNode(2)
-
-        root.right = pivot
-        pivot.parent = root
-        pivot.left = current
-        current.parent = pivot
-
-        avlTree.root = root
-
-        avlTree.rebalance(root)
-
-        expect(avlTree.root?.value).toBe(2)
-        expect(avlTree.root).toBe(current)
-
-        expect(avlTree.root?.left?.value).toBe(1)
-        expect(avlTree.root?.left).toBe(root)
-        expect(avlTree.root?.left?.parent).toBe(avlTree.root)
-
-        expect(avlTree.root?.right?.value).toBe(3)
-        expect(avlTree.root?.right).toBe(pivot)
-        expect(avlTree.root?.right?.parent).toBe(avlTree.root)
       })
     })
-    describe('rebalance with parent', () => {
-      it('LL', () => {
-        const avlTree = new AVLTree<number>()
-        const parent = new AVLTreeNode(4)
-        const root = new AVLTreeNode(3)
-        const pivot = new AVLTreeNode(2)
-        const current = new AVLTreeNode(1)
 
-        parent.left = root
-        root.parent = parent
+    describe('RR', () => {
+      function verifyRRRebalance(
+        tree: AVLTree<number>,
+        root: AVLTreeNode<number>,
+        pivot: AVLTreeNode<number>,
+        current: AVLTreeNode<number>
+      ) {
+        expect(avlTree.root?.right?.value).toBe(2)
+        expect(avlTree.root?.right).toBe(pivot)
 
-        root.left = pivot
-        pivot.parent = root
+        expect(avlTree.root?.right?.left?.value).toBe(1)
+        expect(avlTree.root?.right?.left).toBe(root)
+        expect(avlTree.root?.right?.left?.parent).toBe(
+          avlTree.root?.right
+        )
 
-        pivot.left = current
-        current.parent = pivot
+        expect(avlTree.root?.right?.right?.value).toBe(3)
+        expect(avlTree.root?.right?.right).toBe(current)
+        expect(avlTree.root?.right?.right?.parent).toBe(
+          avlTree.root?.right
+        )
+      }
 
-        avlTree.root = parent
-
-        avlTree.rebalance(root)
-
-        expect(avlTree.root?.value).toBe(4)
-        expect(avlTree.root).toBe(parent)
-        expect(avlTree.root?.parent).toBeNull()
-
-        expect(avlTree.root?.left).toBe(pivot)
-      })
-
-      it('RR', () => {
-        const avlTree = new AVLTree<number>()
-        const parent = new AVLTreeNode(1)
-        const root = new AVLTreeNode(2)
-        const pivot = new AVLTreeNode(3)
-        const current = new AVLTreeNode(4)
+      beforeEach(() => {
+        avlTree = new AVLTree<number>()
+        parent = new AVLTreeNode(0)
+        root = new AVLTreeNode(1)
+        pivot = new AVLTreeNode(2)
+        current = new AVLTreeNode(3)
 
         parent.right = root
         root.parent = parent
-
         root.right = pivot
         pivot.parent = root
-
         pivot.right = current
         current.parent = pivot
 
         avlTree.root = parent
+      })
 
+      it('rebalance', () => {
+        avlTree.rebalance(root)
+        verifyRRRebalance(avlTree, root, pivot, current)
+      })
+
+      it('checkBalance', () => {
+        avlTree.checkBalance(root.right!)
+        verifyRRRebalance(avlTree, root, pivot, current)
+      })
+
+      it('parent is correct', () => {
         avlTree.rebalance(root)
 
-        expect(avlTree.root?.value).toBe(1)
+        expect(avlTree.root?.value).toBe(0)
         expect(avlTree.root).toBe(parent)
         expect(avlTree.root?.parent).toBeNull()
-
         expect(avlTree.root?.right).toBe(pivot)
       })
+    })
 
-      it('LR', () => {
-        const avlTree = new AVLTree<number>()
-        const parent = new AVLTreeNode(4)
-        const root = new AVLTreeNode(2)
-        const pivot = new AVLTreeNode(1)
-        const current = new AVLTreeNode(3)
+    describe('LR', () => {
+      function verifyLRRebalance(
+        tree: AVLTree<number>,
+        root: AVLTreeNode<number>,
+        pivot: AVLTreeNode<number>,
+        current: AVLTreeNode<number>
+      ) {
+        expect(avlTree.root?.right?.value).toBe(2)
+        expect(avlTree.root?.right).toBe(current)
 
-        parent.left = root
+        expect(avlTree.root?.right?.left?.value).toBe(1)
+        expect(avlTree.root?.right?.left).toBe(pivot)
+        expect(avlTree.root?.right?.left?.parent).toBe(
+          avlTree.root?.right
+        )
+
+        expect(avlTree.root?.right?.right?.value).toBe(3)
+        expect(avlTree.root?.right?.right).toBe(root)
+        expect(avlTree.root?.right?.right?.parent).toBe(
+          avlTree.root?.right
+        )
+      }
+
+      beforeEach(() => {
+        avlTree = new AVLTree<number>()
+        parent = new AVLTreeNode(0)
+        root = new AVLTreeNode(3)
+        pivot = new AVLTreeNode(1)
+        current = new AVLTreeNode(2)
+
+        parent.right = root
         root.parent = parent
-
         root.left = pivot
         pivot.parent = root
-
         pivot.right = current
         current.parent = pivot
 
         avlTree.root = parent
-
-        avlTree.rebalance(root)
-
-        expect(avlTree.root?.value).toBe(4)
-        expect(avlTree.root).toBe(parent)
-        expect(avlTree.root?.parent).toBeNull()
-
-        expect(avlTree.root?.left).toBe(current)
       })
 
-      it('RL', () => {
-        const avlTree = new AVLTree<number>()
-        const parent = new AVLTreeNode(1)
-        const root = new AVLTreeNode(3)
-        const pivot = new AVLTreeNode(4)
-        const current = new AVLTreeNode(2)
+      it('rebalance', () => {
+        avlTree.rebalance(root)
+        verifyLRRebalance(avlTree, root, pivot, current)
+      })
 
-        parent.right = root
+      it('checkBalance', () => {
+        avlTree.checkBalance(root.left!)
+        verifyLRRebalance(avlTree, root, pivot, current)
+      })
+
+      it('parent is correct', () => {
+        avlTree.checkBalance(root.left!, true)
+        expect(avlTree.root?.value).toBe(0)
+        expect(avlTree.root).toBe(parent)
+        expect(avlTree.root?.parent).toBeNull()
+        expect(avlTree.root?.right).toBe(current)
+      })
+    })
+
+    describe('RL', () => {
+      function verifyLRRebalance(
+        tree: AVLTree<number>,
+        root: AVLTreeNode<number>,
+        pivot: AVLTreeNode<number>,
+        current: AVLTreeNode<number>
+      ) {
+        expect(avlTree.root?.left?.value).toBe(2)
+        expect(avlTree.root?.left).toBe(current)
+
+        expect(avlTree.root?.left?.left?.value).toBe(1)
+        expect(avlTree.root?.left?.left).toBe(root)
+        expect(avlTree.root?.left?.left?.parent).toBe(
+          avlTree.root?.left
+        )
+
+        expect(avlTree.root?.left?.right?.value).toBe(3)
+        expect(avlTree.root?.left?.right).toBe(pivot)
+        expect(avlTree.root?.left?.right?.parent).toBe(
+          avlTree.root?.left
+        )
+      }
+
+      beforeEach(() => {
+        avlTree = new AVLTree<number>()
+        parent = new AVLTreeNode(4)
+        root = new AVLTreeNode(1)
+        pivot = new AVLTreeNode(3)
+        current = new AVLTreeNode(2)
+
+        parent.left = root
         root.parent = parent
-
         root.right = pivot
         pivot.parent = root
-
         pivot.left = current
         current.parent = pivot
 
         avlTree.root = parent
+      })
 
+      it('rebalance', () => {
         avlTree.rebalance(root)
+        verifyLRRebalance(avlTree, root, pivot, current)
+      })
 
-        expect(avlTree.root?.value).toBe(1)
+      it('checkBalance', () => {
+        avlTree.checkBalance(root.right!)
+        verifyLRRebalance(avlTree, root, pivot, current)
+      })
+
+      it('parent is correct', () => {
+        avlTree.checkBalance(root.right!, true)
+        expect(avlTree.root?.value).toBe(4)
         expect(avlTree.root).toBe(parent)
         expect(avlTree.root?.parent).toBeNull()
-
-        expect(avlTree.root?.right).toBe(current)
+        expect(avlTree.root?.left).toBe(current)
       })
     })
   })

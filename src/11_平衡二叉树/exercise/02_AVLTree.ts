@@ -38,7 +38,7 @@ export class AVLTree<T> extends BSTree<T> {
     return new AVLTreeNode<T>(value)
   }
 
-  protected checkBalance(
+  checkBalance(
     node: AVLTreeNode<T>,
     isAdd: boolean = true
   ): void {
