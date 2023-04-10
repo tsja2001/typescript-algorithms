@@ -1,4 +1,4 @@
-import { BSTree, TreeNode } from './00_BSTree(删除功能重构)'
+import { BSTree, TreeNode } from './00_BSTree'
 import { AVLTreeNode } from './01_AVLTreeNode'
 
 export class AVLTree<T> extends BSTree<T> {

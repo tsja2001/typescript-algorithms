@@ -1,6 +1,6 @@
 import { btPrint } from 'hy-algokit'
 
-import { Node } from '../../00_types/Node'
+import { Node } from '../../../00_types/Node'
 export class TreeNode<T> extends Node<T> {
   left: TreeNode<T> | null = null
   right: TreeNode<T> | null = null

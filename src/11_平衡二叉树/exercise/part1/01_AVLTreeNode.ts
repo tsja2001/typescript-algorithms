@@ -1,4 +1,4 @@
-import { TreeNode } from '../types/TreeNode'
+import { TreeNode } from '../../types/TreeNode'
 
 export class AVLTreeNode<T> extends TreeNode<T> {
   left: AVLTreeNode<T> | null = null
