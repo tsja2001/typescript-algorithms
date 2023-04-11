@@ -1,0 +1,277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sorting algorithms bubble sort 1`] = `[]`;
+
+exports[`Sorting algorithms bubble sort 2`] = `
+[
+  1,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 3`] = `
+[
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 4`] = `
+[
+  2,
+  3,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 5`] = `
+[
+  2,
+  2,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 6`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 7`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms bubble sort 8`] = `
+[
+  -8,
+  -2,
+  3,
+  5,
+  6,
+  7,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 1`] = `[]`;
+
+exports[`Sorting algorithms insertion sort 2`] = `
+[
+  1,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 3`] = `
+[
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 4`] = `
+[
+  2,
+  3,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 5`] = `
+[
+  2,
+  2,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 6`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 7`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms insertion sort 8`] = `
+[
+  -8,
+  -2,
+  3,
+  5,
+  6,
+  7,
+]
+`;
+
+exports[`Sorting algorithms merge sort 1`] = `[]`;
+
+exports[`Sorting algorithms merge sort 2`] = `
+[
+  1,
+]
+`;
+
+exports[`Sorting algorithms merge sort 3`] = `
+[
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`Sorting algorithms merge sort 4`] = `
+[
+  2,
+  3,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms merge sort 5`] = `
+[
+  2,
+  2,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms merge sort 6`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms merge sort 7`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms merge sort 8`] = `
+[
+  -8,
+  -2,
+  3,
+  5,
+  6,
+  7,
+]
+`;
+
+exports[`Sorting algorithms selection sort 1`] = `[]`;
+
+exports[`Sorting algorithms selection sort 2`] = `
+[
+  1,
+]
+`;
+
+exports[`Sorting algorithms selection sort 3`] = `
+[
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`Sorting algorithms selection sort 4`] = `
+[
+  2,
+  3,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms selection sort 5`] = `
+[
+  2,
+  2,
+  5,
+  6,
+  7,
+  8,
+]
+`;
+
+exports[`Sorting algorithms selection sort 6`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms selection sort 7`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+]
+`;
+
+exports[`Sorting algorithms selection sort 8`] = `
+[
+  -8,
+  -2,
+  3,
+  5,
+  6,
+  7,
+]
+`;
