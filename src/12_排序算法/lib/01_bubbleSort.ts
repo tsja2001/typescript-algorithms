@@ -21,8 +21,3 @@ export function bubbleSort(arr: number[]): number[] {
   return arr
 }
 
-const arr = [9, 5, 8, 3, 1, 0]
-
-const sortArr = bubbleSort(arr)
-
-console.log(sortArr)

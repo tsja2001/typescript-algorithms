@@ -1,4 +1,6 @@
 import { bubbleSort } from '../01_bubbleSort'
+import { selectionSort } from '../02_selectionSort'
+import { insertionSort } from '../03_insertSort'
 
 describe('Sorting algorithms', () => {
   const testCases = [
@@ -15,6 +17,8 @@ describe('Sorting algorithms', () => {
   test.each`
     sortFn        | functionName
     ${bubbleSort} | ${'bubble sort'}
+    ${selectionSort} | ${'selecyion sort'}
+    ${insertionSort} | ${'insertion sort'}
   `('$functionName', ({ sortFn }) => {
     testCases.forEach(({ input, expected }) => {
       expect(sortFn(input)).toEqual(expected)
