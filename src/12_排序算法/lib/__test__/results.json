@@ -1,48 +1,48 @@
 {
   "algorithms": {
     "bubble sort": {
-      "empty array": 36.399999633431435,
-      "array with one element": 3.200000151991844,
-      "array in descending order": 63.80000011995435,
-      "array with repeated elements": 9.499999694526196,
-      "array in ascending order": 6.200000178068876,
-      "array with negative numbers": 4.500000271946192,
-      "array with large number of elements": 330960.5000000447,
-      "array with large number of elements in descending order": 205791.9000000693,
-      "average": 67109.50000002049
+      "empty array": 47.29999997653067,
+      "array with one element": 3.599999938160181,
+      "array in descending order": 85.80000000074506,
+      "array with repeated elements": 10.999999940395355,
+      "array in ascending order": 6.999999983236194,
+      "array with negative numbers": 4.799999995157123,
+      "array with large number of elements": 340017.19999988563,
+      "array with large number of elements in descending order": 210189.500000095,
+      "average": 68795.77499997686
     },
     "selection sort": {
-      "empty array": 4.399999976158142,
-      "array with one element": 2.599999774247408,
-      "array in descending order": 3.900000359863043,
-      "array with repeated elements": 5.200000014156103,
-      "array in ascending order": 5.70000009611249,
-      "array with negative numbers": 1.6999999061226845,
-      "array with large number of elements": 102187.79999995604,
-      "array with large number of elements in descending order": 111232.10000013933,
-      "average": 26680.425000027753
+      "empty array": 4.699999932199717,
+      "array with one element": 2.899999963119626,
+      "array in descending order": 4.699999932199717,
+      "array with repeated elements": 6.300000008195639,
+      "array in ascending order": 8.000000147148967,
+      "array with negative numbers": 2.0000000949949026,
+      "array with large number of elements": 108937.80000018887,
+      "array with large number of elements in descending order": 119241.60000006668,
+      "average": 28526.000000041677
     },
     "insertion sort": {
-      "empty array": 41.20000032708049,
-      "array with one element": 3.900000359863043,
-      "array in descending order": 13.800000306218863,
-      "array with repeated elements": 2.3000002838671207,
-      "array in ascending order": 12.09999993443489,
-      "array with negative numbers": 2.79999990016222,
-      "array with large number of elements": 510.600000154227,
-      "array with large number of elements in descending order": 140.29999962076545,
-      "average": 90.87500011082739
+      "empty array": 3.2999999821186066,
+      "array with one element": 1.0999999940395355,
+      "array in descending order": 8.90000001527369,
+      "array with repeated elements": 1.299999887123704,
+      "array in ascending order": 16.499999910593033,
+      "array with negative numbers": 1.4999997802078724,
+      "array with large number of elements": 471.49999998509884,
+      "array with large number of elements in descending order": 216.10000007785857,
+      "average": 90.02499995403923
     },
     "merge sort": {
-      "empty array": 1.999999862164259,
+      "empty array": 2.4999999441206455,
       "array with one element": 1.0999999940395355,
-      "array in descending order": 8.400000166147947,
-      "array with repeated elements": 13.499999884516,
-      "array in ascending order": 3.7000002339482307,
-      "array with negative numbers": 4.399999976158142,
-      "array with large number of elements": 8554.000000003725,
-      "array with large number of elements in descending order": 4896.800000220537,
-      "average": 1685.4875000426546
+      "array in descending order": 6.999999983236194,
+      "array with repeated elements": 17.80000003054738,
+      "array in ascending order": 5.000000121071935,
+      "array with negative numbers": 6.099999882280827,
+      "array with large number of elements": 14197.299999883398,
+      "array with large number of elements in descending order": 5110.100000165403,
+      "average": 2418.3625000005122
     }
   }
 }

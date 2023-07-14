@@ -87,7 +87,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       if (current.value === value) {
         if (current === this.head) {
           this.head = current.next
-        }else{
+        } else {
           prev!.next = current.next
         }
         this.length--
@@ -100,6 +100,8 @@ export class LinkedList<T> implements ILinkedList<T> {
     return false
   }
   get(position: number): T | null {
+    if(position < 0 || position > this.length - 1) return null
+
     let current = this.head
     while (position-- > 0 && current) {
       current = current?.next
@@ -118,13 +120,27 @@ export class LinkedList<T> implements ILinkedList<T> {
     return current
   }
   update(value: T, position: number): boolean {
-    if(position < 0 && position > this.length - 1) return false
+    if (position < 0 || position > this.length - 1) return false
+
+    const current = this.getNode(position)
+    if (current) {
+      current.value = value
+    }
+
+    return true
   }
   indexOf(value: T): number {
-    throw new Error('Method not implemented.')
+    let index = 0
+    let current = this.head
+    while(current){
+      if(current.value === value) return index
+      current = current.next
+      index++
+    }
+    return -1
   }
   isEmpty(): boolean {
-    throw new Error('Method not implemented.')
+    return this.length === 0
   }
   pick: () => T | undefined = () => {
     return this.head?.value

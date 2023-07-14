@@ -166,116 +166,118 @@ describe('LinkedList', () => {
     })
   })
 
-  // describe('get', () => {
-  //   test('should get the first element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.get(0)).toBe(1)
-  //   })
-  //   test('should get the last element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.get(2)).toBe(3)
-  //   })
+  
+  describe('update', () => {
+    test('should update the first element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.indexOf(0)).toBe(-1)
+      expect(linkedList.indexOf(2)).toBe(1)
+      expect(linkedList.indexOf(3)).toBe(2)
+    })
 
-  //   test('should get an element in the middle of the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.get(1)).toBe(2)
-  //   })
+    test('should update the last element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.update(4, 2)).toBe(true)
+      expect(linkedList.get(2)).toBe(4)
+    })
 
-  //   test('should not get an element at an invalid position', () => {
-  //     linkedList.append(1)
-  //     expect(linkedList.get(-1)).toBe(null)
-  //     expect(linkedList.get(1)).toBe(null)
-  //   })
-  // })
+    test('should update an element in the middle of the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.update(4, 1)).toBe(true)
+      expect(linkedList.get(1)).toBe(4)
+    })
 
-  // describe('update', () => {
-  //   test('should update the first element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.update(0, 0)).toBe(true)
-  //     expect(linkedList.get(0)).toBe(0)
-  //   })
+    test('should not update an element at an invalid position', () => {
+      linkedList.append(1)
+      expect(linkedList.update(2, -1)).toBe(false)
+      expect(linkedList.update(2, 1)).toBe(false)
+      expect(linkedList.length).toBe(1)
+    })
+  })
 
-  //   test('should update the last element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.update(4, 2)).toBe(true)
-  //     expect(linkedList.get(2)).toBe(4)
-  //   })
+  describe('indexOf', () => {
+    test('should return the index of the first occurrence of an element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.indexOf(1)).toBe(0)
+      expect(linkedList.indexOf(2)).toBe(1)
+      expect(linkedList.indexOf(3)).toBe(2)
+    })
 
-  //   test('should update an element in the middle of the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.update(4, 1)).toBe(true)
-  //     expect(linkedList.get(1)).toBe(4)
-  //   })
+    test('should return -1 if the element is not found in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.indexOf(4)).toBe(-1)
+    })
+  })
 
-  //   test('should not update an element at an invalid position', () => {
-  //     linkedList.append(1)
-  //     expect(linkedList.update(2, -1)).toBe(false)
-  //     expect(linkedList.update(2, 1)).toBe(false)
-  //     expect(linkedList.length).toBe(1)
-  //   })
-  // })
+  describe('get', () => {
+    test('should get the first element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.get(0)).toBe(1)
+    })
+    test('should get the last element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.get(2)).toBe(3)
+    })
 
-  // describe('indexOf', () => {
-  //   test('should update the first element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.indexOf(0)).toBe(-1)
-  //     expect(linkedList.indexOf(2)).toBe(1)
-  //     expect(linkedList.indexOf(3)).toBe(2)
-  //   })
+    test('should get an element in the middle of the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.get(1)).toBe(2)
+    })
 
-  //   test('should update the last element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.update(4, 2)).toBe(true)
-  //     expect(linkedList.get(2)).toBe(4)
-  //   })
+    test('should not get an element at an invalid position', () => {
+      linkedList.append(1)
+      expect(linkedList.get(-1)).toBe(null)
+      expect(linkedList.get(1)).toBe(null)
+    })
+  })
 
-  //   test('should update an element in the middle of the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.update(4, 1)).toBe(true)
-  //     expect(linkedList.get(1)).toBe(4)
-  //   })
+  describe('update', () => {
+    test('should update the first element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.update(0, 0)).toBe(true)
+      expect(linkedList.get(0)).toBe(0)
+    })
 
-  //   test('should not update an element at an invalid position', () => {
-  //     linkedList.append(1)
-  //     expect(linkedList.update(2, -1)).toBe(false)
-  //     expect(linkedList.update(2, 1)).toBe(false)
-  //     expect(linkedList.length).toBe(1)
-  //   })
-  // })
+    test('should update the last element in the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.update(4, 2)).toBe(true)
+      expect(linkedList.get(2)).toBe(4)
+    })
 
-  // describe('indexOf', () => {
-  //   test('should return the index of the first occurrence of an element in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.indexOf(1)).toBe(0)
-  //     expect(linkedList.indexOf(2)).toBe(1)
-  //     expect(linkedList.indexOf(3)).toBe(2)
-  //   })
+    test('should update an element in the middle of the list', () => {
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      expect(linkedList.update(4, 1)).toBe(true)
+      expect(linkedList.get(1)).toBe(4)
+    })
 
-  //   test('should return -1 if the element is not found in the list', () => {
-  //     linkedList.append(1)
-  //     linkedList.append(2)
-  //     linkedList.append(3)
-  //     expect(linkedList.indexOf(4)).toBe(-1)
-  //   })
-  // })
+    test('should not update an element at an invalid position', () => {
+      linkedList.append(1)
+      expect(linkedList.update(2, -1)).toBe(false)
+      expect(linkedList.update(2, 1)).toBe(false)
+      expect(linkedList.length).toBe(1)
+    })
+  })
+
 })
