@@ -32,17 +32,27 @@ describe('HashTable', () => {
 
   it('should resize correctly', () => {
     const hashTable = new HashTable<number>()
-    hashTable.put('apple', 1)
-    hashTable.put('banana', 2)
-    hashTable.put('cherry', 3)
+    
+    // 扩容测试：添加8个元素，超过0.75的负载因子
+    for(let i = 1; i <= 8; i++) {
+      hashTable.put(`fruit${i}`, i)
+    }
+    // 检查是否添加成功
+    for(let i = 1; i <= 8; i++) {
+      expect(hashTable.get(`fruit${i}`)).toBe(i)
+    }
 
-    // 扩容
-    hashTable.put('durian', 4)
-    expect(hashTable.get('durian')).toBe(4)
-
-    // 缩容
-    hashTable.delete('durian')
-    hashTable.delete('cherry')
-    expect(hashTable.get('cherry')).toBeUndefined()
+    // 缩容测试：删除到只剩2个元素，低于0.25的负载因子
+    for(let i = 8; i > 2; i--) {
+      hashTable.delete(`fruit${i}`)
+    }
+    // 检查是否删除成功
+    for(let i = 3; i <= 8; i++) {
+      expect(hashTable.get(`fruit${i}`)).toBeUndefined()
+    }
+    // 检查剩余的元素是否仍在哈希表中
+    for(let i = 1; i <= 2; i++) {
+      expect(hashTable.get(`fruit${i}`)).toBe(i)
+    }
   })
 })
