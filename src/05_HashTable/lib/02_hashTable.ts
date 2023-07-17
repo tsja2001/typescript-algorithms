@@ -1,10 +1,11 @@
-export class HashTable<T = any> {
+import { IHashTable } from './../types/IHashTable';
+export class _HashTable<T> implements IHashTable<T> {
   // 存放链地址法中的链
   storage: [string, T][][] = []
   // 数组长度
   length: number = 7
   // 记录已经存放元素的个数
-  private count: number = 0
+  count: number = 0
 
   // 获取一个字符串的哈希值
   hashFunc(key: string, max: number): number {
@@ -19,7 +20,7 @@ export class HashTable<T = any> {
     return index
   }
 
-  private isPrime(num: number) {
+  isPrime(num: number) {
     // 获取平方根
     const square = Math.sqrt(num)
     for (let i = 2; i <= square; i++) {
@@ -31,7 +32,7 @@ export class HashTable<T = any> {
     return true
   }
 
-  private getNextPrime(num: number) {
+  getNextPrime(num: number) {
     let resNum = num
 
     while (!this.isPrime(resNum)) {
@@ -144,7 +145,7 @@ export class HashTable<T = any> {
   }
 }
 
-const hashTable = new HashTable<number>()
+const hashTable = new _HashTable<number>()
 
 hashTable.put('aaa', 56)
 hashTable.put('dfsf', 232)
