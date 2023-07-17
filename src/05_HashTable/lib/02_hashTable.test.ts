@@ -1,58 +1,68 @@
-import { HashTable } from './02_hashTable'
+import { HashTable } from './02_hashTable'; // 注意：你可能需要修改这个路径使其指向你的实现文件。
 
 describe('HashTable', () => {
-  it('should put and get values correctly', () => {
-    const hashTable = new HashTable<number>()
-    hashTable.put('apple', 1)
-    hashTable.put('banana', 2)
-    hashTable.put('cherry', 3)
+  let hashTable: any
 
-    expect(hashTable.get('apple')).toBe(1)
-    expect(hashTable.get('banana')).toBe(2)
-    expect(hashTable.get('cherry')).toBe(3)
-  })
+  beforeEach(() => {
+    hashTable = new HashTable();
+  });
 
-  it('should update values correctly', () => {
-    const hashTable = new HashTable<number>()
-    hashTable.put('apple', 1)
-    hashTable.put('apple', 2)
+  test('hashFunc method', () => {
+    expect(hashTable.hashFunc('key1', 7)).toBeLessThan(7);
+  });
 
-    expect(hashTable.get('apple')).toBe(2)
-  })
+  test('isPrime method', () => {
+    expect(hashTable.isPrime(2)).toBe(true);
+    expect(hashTable.isPrime(3)).toBe(true);
+    expect(hashTable.isPrime(4)).toBe(false);
+    expect(hashTable.isPrime(5)).toBe(true);
+  });
 
-  it('should delete values correctly', () => {
-    const hashTable = new HashTable<number>()
-    hashTable.put('apple', 1)
-    hashTable.put('banana', 2)
-    hashTable.put('cherry', 3)
+  test('getNextPrime method', () => {
+    expect(hashTable.getNextPrime(8)).toBe(11);
+    expect(hashTable.getNextPrime(14)).toBe(17);
+  });
 
-    expect(hashTable.delete('banana')).toBe(2)
-    expect(hashTable.get('banana')).toBeUndefined()
-  })
+  test('put and get methods', () => {
+    hashTable.put('key1', 'value1');
+    expect(hashTable.get('key1')).toBe('value1');
 
-  it('should resize correctly', () => {
-    const hashTable = new HashTable<number>()
-    
-    // 扩容测试：添加8个元素，超过0.75的负载因子
-    for(let i = 1; i <= 8; i++) {
-      hashTable.put(`fruit${i}`, i)
+    hashTable.put('key2', 'value2');
+    expect(hashTable.get('key2')).toBe('value2');
+
+    // 测试更新值的功能
+    hashTable.put('key1', 'new_value1');
+    expect(hashTable.get('key1')).toBe('new_value1');
+  });
+
+  test('delete method', () => {
+    hashTable.put('key1', 'value1');
+    hashTable.put('key2', 'value2');
+
+    hashTable.delete('key1');
+    expect(hashTable.get('key1')).toBeUndefined();
+
+    // 确保只删除了 'key1'
+    expect(hashTable.get('key2')).toBe('value2');
+  });
+
+  test('resize method', () => {
+    for(let i = 0; i < 100; i++) {
+      hashTable.put(`key${i}`, `value${i}`);
     }
-    // 检查是否添加成功
-    for(let i = 1; i <= 8; i++) {
-      expect(hashTable.get(`fruit${i}`)).toBe(i)
+
+    // 确保元素在扩容后还在
+    for(let i = 0; i < 100; i++) {
+      expect(hashTable.get(`key${i}`)).toBe(`value${i}`);
     }
 
-    // 缩容测试：删除到只剩2个元素，低于0.25的负载因子
-    for(let i = 8; i > 2; i--) {
-      hashTable.delete(`fruit${i}`)
+    for(let i = 0; i < 75; i++) {
+      hashTable.delete(`key${i}`);
     }
-    // 检查是否删除成功
-    for(let i = 3; i <= 8; i++) {
-      expect(hashTable.get(`fruit${i}`)).toBeUndefined()
+
+    // 确保元素在缩容后还在
+    for(let i = 75; i < 100; i++) {
+      expect(hashTable.get(`key${i}`)).toBe(`value${i}`);
     }
-    // 检查剩余的元素是否仍在哈希表中
-    for(let i = 1; i <= 2; i++) {
-      expect(hashTable.get(`fruit${i}`)).toBe(i)
-    }
-  })
-})
+  });
+});
