@@ -1,4 +1,4 @@
-import { HashTable } from './02_hashTable'; // 注意：你可能需要修改这个路径使其指向你的实现文件。
+import { HashTable } from '../02_hashTable'; // 注意：你可能需要修改这个路径使其指向你的实现文件。
 
 describe('HashTable', () => {
   let hashTable: any
@@ -24,14 +24,19 @@ describe('HashTable', () => {
   });
 
   test('put and get methods', () => {
+    expect(hashTable.count).toBe(0)
+
     hashTable.put('key1', 'value1');
     expect(hashTable.get('key1')).toBe('value1');
+    expect(hashTable.count).toBe(1)
 
     hashTable.put('key2', 'value2');
     expect(hashTable.get('key2')).toBe('value2');
+    expect(hashTable.count).toBe(2)
 
     // 测试更新值的功能
     hashTable.put('key1', 'new_value1');
+    expect(hashTable.count).toBe(2)
     expect(hashTable.get('key1')).toBe('new_value1');
   });
 

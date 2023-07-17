@@ -1,48 +1,48 @@
 {
   "algorithms": {
     "bubble sort": {
-      "empty array": 62.00000084936619,
-      "array with one element": 7.600000128149986,
-      "array in descending order": 112.29999922215939,
-      "array with repeated elements": 14.399999752640724,
-      "array in ascending order": 9.89999994635582,
-      "array with negative numbers": 6.500000134110451,
-      "array with large number of elements": 667359.6000000834,
-      "array with large number of elements in descending order": 302573.19999858737,
-      "average": 121268.18749983795
+      "empty array": 42.500000447034836,
+      "array with one element": 4.200000315904617,
+      "array in descending order": 85.50000004470348,
+      "array with repeated elements": 11.099999770522118,
+      "array in ascending order": 7.799999788403511,
+      "array with negative numbers": 5.300000309944153,
+      "array with large number of elements": 341851.9999999553,
+      "array with large number of elements in descending order": 221954.30000126362,
+      "average": 70495.33750023693
     },
     "selection sort": {
-      "empty array": 6.399998441338539,
-      "array with one element": 3.90000082552433,
-      "array in descending order": 6.100000813603401,
-      "array with repeated elements": 8.400000631809235,
-      "array in ascending order": 9.099999442696571,
-      "array with negative numbers": 2.5999993085861206,
-      "array with large number of elements": 129894.50000040233,
-      "array with large number of elements in descending order": 127903.1000006944,
-      "average": 32229.262500070035
+      "empty array": 5.20000047981739,
+      "array with one element": 3.200000151991844,
+      "array in descending order": 6.500000134110451,
+      "array with repeated elements": 6.6999997943639755,
+      "array in ascending order": 7.500000298023224,
+      "array with negative numbers": 2.2999998182058334,
+      "array with large number of elements": 120665.59999994934,
+      "array with large number of elements in descending order": 138066.9000018388,
+      "average": 32345.48750030808
     },
     "insertion sort": {
-      "empty array": 8.100001141428947,
-      "array with one element": 4.599999636411667,
-      "array in descending order": 25.699999183416367,
-      "array with repeated elements": 8.19999910891056,
-      "array in ascending order": 32.39999897778034,
-      "array with negative numbers": 3.200000151991844,
-      "array with large number of elements": 1015.9000009298325,
-      "array with large number of elements in descending order": 282.99999982118607,
-      "average": 172.63749986886978
+      "empty array": 4.0000006556510925,
+      "array with one element": 1.3999994844198227,
+      "array in descending order": 10.700000450015068,
+      "array with repeated elements": 1.6000010073184967,
+      "array in ascending order": 12.299999594688416,
+      "array with negative numbers": 1.6999989748001099,
+      "array with large number of elements": 522.6000007241964,
+      "array with large number of elements in descending order": 179.89999987185,
+      "average": 91.77500009536743
     },
     "merge sort": {
-      "empty array": 3.0999984592199326,
-      "array with one element": 1.7999988049268723,
-      "array in descending order": 10.29999926686287,
-      "array with repeated elements": 21.300001069903374,
-      "array in ascending order": 5.59999980032444,
-      "array with negative numbers": 10.900000110268593,
-      "array with large number of elements": 17986.30000092089,
-      "array with large number of elements in descending order": 7507.89999961853,
-      "average": 3193.399999756366
+      "empty array": 4.0000006556510925,
+      "array with one element": 1.3999994844198227,
+      "array in descending order": 8.700000122189522,
+      "array with repeated elements": 18.09999905526638,
+      "array in ascending order": 5.099998787045479,
+      "array with negative numbers": 5.699999630451202,
+      "array with large number of elements": 13160.900000482798,
+      "array with large number of elements in descending order": 6551.799999549985,
+      "average": 2469.4624997209758
     }
   }
 }
