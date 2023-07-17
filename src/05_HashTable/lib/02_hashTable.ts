@@ -1,5 +1,5 @@
 import { IHashTable } from './../types/IHashTable';
-export class _HashTable<T> implements IHashTable<T> {
+export class HashTable<T> implements IHashTable<T> {
   // 存放链地址法中的链
   storage: [string, T][][] = []
   // 数组长度
@@ -145,7 +145,7 @@ export class _HashTable<T> implements IHashTable<T> {
   }
 }
 
-const hashTable = new _HashTable<number>()
+const hashTable = new HashTable<number>()
 
 hashTable.put('aaa', 56)
 hashTable.put('dfsf', 232)

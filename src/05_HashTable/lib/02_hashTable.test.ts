@@ -1,8 +1,8 @@
-import { _HashTable } from './02_hashTable'
+import { HashTable } from './02_hashTable'
 
 describe('HashTable', () => {
   it('should put and get values correctly', () => {
-    const hashTable = new _HashTable<number>()
+    const hashTable = new HashTable<number>()
     hashTable.put('apple', 1)
     hashTable.put('banana', 2)
     hashTable.put('cherry', 3)
@@ -13,7 +13,7 @@ describe('HashTable', () => {
   })
 
   it('should update values correctly', () => {
-    const hashTable = new _HashTable<number>()
+    const hashTable = new HashTable<number>()
     hashTable.put('apple', 1)
     hashTable.put('apple', 2)
 
@@ -21,7 +21,7 @@ describe('HashTable', () => {
   })
 
   it('should delete values correctly', () => {
-    const hashTable = new _HashTable<number>()
+    const hashTable = new HashTable<number>()
     hashTable.put('apple', 1)
     hashTable.put('banana', 2)
     hashTable.put('cherry', 3)
@@ -31,7 +31,7 @@ describe('HashTable', () => {
   })
 
   it('should resize correctly', () => {
-    const hashTable = new _HashTable<number>()
+    const hashTable = new HashTable<number>()
     
     // 扩容测试：添加8个元素，超过0.75的负载因子
     for(let i = 1; i <= 8; i++) {
