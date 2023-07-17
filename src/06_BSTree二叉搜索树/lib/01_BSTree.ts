@@ -28,7 +28,7 @@ export class BSTree<T> {
     btPrint(this.root)
   }
 
-  private insertNode(value: T, node: TreeNode<T>) {
+  insertNode(value: T, node: TreeNode<T>) {
     if (value < node.value) {
       if (!node.left) {
         node.left = new TreeNode(value)
@@ -49,7 +49,7 @@ export class BSTree<T> {
     this.preOrderTraverseNode(this.root)
   }
 
-  private preOrderTraverseNode(node: TreeNode<T> | null) {
+  preOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       console.log(node?.value)
       this.preOrderTraverseNode(node.left)
@@ -62,7 +62,7 @@ export class BSTree<T> {
     this.inOrderTraverseNode(this.root)
   }
 
-  private inOrderTraverseNode(node: TreeNode<T> | null) {
+  inOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       this.inOrderTraverseNode(node.left)
       console.log(node.value)
@@ -75,7 +75,7 @@ export class BSTree<T> {
     this.postOrderTraverseNode(this.root)
   }
 
-  private postOrderTraverseNode(node: TreeNode<T> | null) {
+  postOrderTraverseNode(node: TreeNode<T> | null) {
     if (node) {
       this.postOrderTraverseNode(node.left)
       this.postOrderTraverseNode(node.right)
@@ -202,15 +202,15 @@ export class BSTree<T> {
     else {
       const successor = this.getSuccessor(currenNode)
       // 3.1当前节点为根节点
-      if(currenNode === this.root){
+      if (currenNode === this.root) {
         this.root = successor
       }
       // 3.2当前节点为父节点的左子节点
-      else if(currenNode.isLeft){
+      else if (currenNode.isLeft) {
         currenNode.parent!.left = successor
       }
       // 3.3当前节点为父节点的右子节点
-      else{
+      else {
         currenNode.parent!.right = successor
       }
     }
@@ -219,20 +219,20 @@ export class BSTree<T> {
   }
 
   // 获取后继节点
-  private getSuccessor(delNode: TreeNode<T>): TreeNode<T> {
+  getSuccessor(delNode: TreeNode<T>): TreeNode<T> {
     let currentNode: TreeNode<T> | null = delNode.right
     let successor: TreeNode<T> | null = null
 
     while (currentNode) {
       successor = currentNode
       currentNode = currentNode.left
-      if(currentNode){
+      if (currentNode) {
         currentNode.parent = successor
       }
     }
 
-    if(successor !== delNode.right){
-      successor!.parent!.left = successor!.right 
+    if (successor !== delNode.right) {
+      successor!.parent!.left = successor!.right
       successor!.right = delNode.right
     }
 

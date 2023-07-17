@@ -1,4 +1,4 @@
-import { BSTree } from '../lib/01_BSTree';
+import { _BSTree as BSTree } from '../_BSTree';
 
 describe('BSTree', () => {
   let bstree: any;
