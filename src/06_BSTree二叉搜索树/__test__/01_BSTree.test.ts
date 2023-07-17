@@ -63,4 +63,56 @@ describe('BSTree', () => {
     expect(mockPrint.mock.calls.map(call => call[0])).toEqual([5, 3, 7, 2, 6, 8]);
     mockPrint.mockRestore();
   });
+
+  describe('BSTree', () => {
+    let bst: BSTree<number>;
+  
+    beforeEach(() => {
+      bst = new BSTree();
+      bst.insert(8);
+      bst.insert(3);
+      bst.insert(10);
+      bst.insert(1);
+      bst.insert(6);
+      bst.insert(14);
+      bst.insert(4);
+      bst.insert(7);
+      bst.insert(13);
+    });
+  
+    // Case 1: 删除没有子节点的节点
+    test('should remove a node without children', () => {
+      // 删除节点1，它是节点3的左子节点
+      bst.remove(1);
+      expect(bst.search(1)).toBeFalsy();
+      expect(bst?.root?.left?.left).toBeNull();
+  
+      // 删除节点7，它是节点6的右子节点
+      bst.remove(7);
+      expect(bst.search(7)).toBeFalsy();
+      expect(bst?.root?.left?.right?.right).toBeNull();
+    });
+  
+    // Case 2: 删除有一个子节点的节点
+    test('should remove a node with one child', () => {
+      // 删除节点6，它是节点3的右子节点，节点4是它的左子节点
+      bst.remove(6);
+      expect(bst.search(6)).toBeFalsy();
+      expect(bst?.root?.left?.right?.value).toBe(7);
+  
+      // 删除节点14，它是节点10的右子节点，节点13是它的左子节点
+      bst.remove(14);
+      expect(bst.search(14)).toBeFalsy();
+      expect(bst?.root?.right?.right?.value).toBe(13);
+    });
+  
+    // Case 3: 删除有两个子节点的节点
+    test('should remove a node with two children', () => {
+      // 删除节点3，它是节点8的左子节点，节点4和节点8是它的子节点
+      bst.remove(3);
+      expect(bst.search(3)).toBeFalsy();
+      expect(bst?.root?.left?.value).toBe(4);
+      expect(bst?.root?.left?.right?.value).toBe(6);
+    });
+  });
 });

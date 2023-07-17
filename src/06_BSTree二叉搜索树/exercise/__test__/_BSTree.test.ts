@@ -16,15 +16,21 @@ describe('BSTree', () => {
     expect(bstree.root.value).toBe(5);
     bstree.insert(3);
     expect(bstree.root.left.value).toBe(3);
+    bstree.insert(2);
+    expect(bstree.root.left.left.value).toBe(2);
     bstree.insert(7);
     expect(bstree.root.right.value).toBe(7);
+    bstree.insert(6);
+    expect(bstree.root.right.left.value).toBe(6);
+    bstree.insert(8);
+    expect(bstree.root.right.right.value).toBe(8);
   });
 
-  // test('getMaxValue and getMinValue should return correct values', () => {
-  //   [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
-  //   expect(bstree.getMaxValue()).toBe(8);
-  //   expect(bstree.getMinValue()).toBe(2);
-  // });
+  test('getMaxValue and getMinValue should return correct values', () => {
+    [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
+    expect(bstree.getMaxValue()).toBe(8);
+    expect(bstree.getMinValue()).toBe(2);
+  });
 
 	test('searchNode should return correct node result', () => {
 		[5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
@@ -40,35 +46,35 @@ describe('BSTree', () => {
   //   expect(bstree.search(1)).toBeFalsy();
   // });
 
-  // test('preOrderTraverse prints values in correct order', () => {
-  //   const mockPrint = jest.spyOn(console, 'log');
-  //   [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
-  //   bstree.preOrderTraverse();
-  //   expect(mockPrint.mock.calls.map(call => call[0])).toEqual([5, 3, 2, 7, 6, 8]);
-  //   mockPrint.mockRestore();
-  // });
+  test('preOrderTraverse prints values in correct order', () => {
+    const mockPrint = jest.spyOn(console, 'log');
+    [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
+    bstree.preOrderTraverse();
+    expect(mockPrint.mock.calls.map(call => call[0])).toEqual([5, 3, 2, 7, 6, 8]);
+    mockPrint.mockRestore();
+  });
 
-  // test('inOrderTraverse prints values in correct order', () => {
-  //   const mockPrint = jest.spyOn(console, 'log');
-  //   [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
-  //   bstree.inOrderTraverse();
-  //   expect(mockPrint.mock.calls.map(call => call[0])).toEqual([2, 3, 5, 6, 7, 8]);
-  //   mockPrint.mockRestore();
-  // });
+  test('inOrderTraverse prints values in correct order', () => {
+    const mockPrint = jest.spyOn(console, 'log');
+    [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
+    bstree.inOrderTraverse();
+    expect(mockPrint.mock.calls.map(call => call[0])).toEqual([2, 3, 5, 6, 7, 8]);
+    mockPrint.mockRestore();
+  });
 
-  // test('postOrderTraverse prints values in correct order', () => {
-  //   const mockPrint = jest.spyOn(console, 'log');
-  //   [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
-  //   bstree.postOrderTraverse();
-  //   expect(mockPrint.mock.calls.map(call => call[0])).toEqual([2, 3, 6, 8, 7, 5]);
-  //   mockPrint.mockRestore();
-  // });
+  test('postOrderTraverse prints values in correct order', () => {
+    const mockPrint = jest.spyOn(console, 'log');
+    [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
+    bstree.postOrderTraverse();
+    expect(mockPrint.mock.calls.map(call => call[0])).toEqual([2, 3, 6, 8, 7, 5]);
+    mockPrint.mockRestore();
+  });
 
-  // test('levelOrderTraverse prints values in correct order', () => {
-  //   const mockPrint = jest.spyOn(console, 'log');
-  //   [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
-  //   bstree.levelOrderTraverse();
-  //   expect(mockPrint.mock.calls.map(call => call[0])).toEqual([5, 3, 7, 2, 6, 8]);
-  //   mockPrint.mockRestore();
-  // });
+  test('levelOrderTraverse prints values in correct order', () => {
+    const mockPrint = jest.spyOn(console, 'log');
+    [5, 3, 7, 2, 6, 8].forEach(val => bstree.insert(val));
+    bstree.levelOrderTraverse();
+    expect(mockPrint.mock.calls.map(call => call[0])).toEqual([5, 3, 7, 2, 6, 8]);
+    mockPrint.mockRestore();
+  });
 });

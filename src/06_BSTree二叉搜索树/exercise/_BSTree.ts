@@ -17,9 +17,6 @@ class TreeNode<T> extends Node<T> {
 }
 
 export class _BSTree<T> implements IBSTree<T> {
-  preOrderTraverse(): void {
-    throw new Error('Method not implemented.')
-  }
   root: TreeNode<T> | null = null
   insert(value: T): void {
     if (!this.root) {
@@ -46,29 +43,65 @@ export class _BSTree<T> implements IBSTree<T> {
       }
     }
   }
+  preOrderTraverse(): void {
+    this.preOrderTraverseNode(this.root)
+  }
   preOrderTraverseNode(node: TreeNode<T> | null): void {
-    throw new Error('Method not implemented.')
+    if (node) {
+      console.log(node.value)
+      this.preOrderTraverseNode(node.left)
+      this.preOrderTraverseNode(node.right)
+    }
   }
   inOrderTraverse(): void {
-    throw new Error('Method not implemented.')
+    this.inOrderTraverseNode(this.root)
   }
   inOrderTraverseNode(node: TreeNode<T> | null): void {
-    throw new Error('Method not implemented.')
+    if (node) {
+      this.inOrderTraverseNode(node.left)
+      console.log(node.value)
+      this.inOrderTraverseNode(node.right)
+    }
   }
   postOrderTraverse(): void {
-    throw new Error('Method not implemented.')
+    this.postOrderTraverseNode(this.root)
   }
   postOrderTraverseNode(node: TreeNode<T> | null): void {
-    throw new Error('Method not implemented.')
+    if (node) {
+      this.postOrderTraverseNode(node.left)
+      this.postOrderTraverseNode(node.right)
+      console.log(node.value)
+    }
   }
   levelOrderTraverse(): void {
-    throw new Error('Method not implemented.')
+    if (this.root === null) return
+
+    let currentNode: TreeNode<T> | null = null
+
+    const queue: TreeNode<T>[] = [this.root]
+
+    while (queue.length) {
+      const queueItem = queue.shift()!
+      console.log(queueItem.value)
+      queueItem.left && queue.push(queueItem.left)
+      queueItem.right && queue.push(queueItem.right)
+    }
   }
   getMaxValue(): T | null {
-    throw new Error('Method not implemented.')
+    let currentNode: TreeNode<T> | null = this.root
+    while(currentNode?.right) {
+      currentNode = currentNode.right
+    }
+
+    return currentNode?.value ?? null
   }
   getMinValue(): T | null {
-    throw new Error('Method not implemented.')
+    let currentNode: TreeNode<T> | null = this.root
+    while(currentNode?.left) {
+      currentNode = currentNode?.left
+    }
+
+    return currentNode?.value ?? null
   }
   searchNode(value: T): TreeNode<T> | null {
     let currentNode: TreeNode<T> | null = this.root
@@ -90,7 +123,7 @@ export class _BSTree<T> implements IBSTree<T> {
     return null
   }
   search(value: T): boolean {
-    this.searchNode(value) !== null
+    return this.searchNode(value) !== null
   }
   remove(value: T): boolean {
     throw new Error('Method not implemented.')
