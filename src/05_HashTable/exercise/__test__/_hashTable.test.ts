@@ -1,4 +1,4 @@
-import { _HashTable } from './_hashTable' // 注意：你可能需要修改这个路径使其指向你的实现文件。
+import { _HashTable } from '../_hashTable' // 注意：你可能需要修改这个路径使其指向你的实现文件。
 
 describe('HashTable', () => {
   let hashTable: any
@@ -8,7 +8,7 @@ describe('HashTable', () => {
   })
 
   test('hashFunc method', () => {
-    // expect(hashTable.hashFunc('key1', 7)).toBeLessThan(7)
+    expect(hashTable.hashFunc('key1', 7)).toBeLessThan(7)
   })
 
   // test('isPrime method', () => {
@@ -23,17 +23,17 @@ describe('HashTable', () => {
   //   expect(hashTable.getNextPrime(14)).toBe(17)
   // })
 
-  // test('put and get methods', () => {
-  //   hashTable.put('key1', 'value1')
-  //   expect(hashTable.get('key1')).toBe('value1')
+  test('put and get methods', () => {
+    hashTable.put('key1', 'value1')
+    expect(hashTable.get('key1')).toBe('value1')
 
-  //   hashTable.put('key2', 'value2')
-  //   expect(hashTable.get('key2')).toBe('value2')
+    hashTable.put('key2', 'value2')
+    expect(hashTable.get('key2')).toBe('value2')
 
-  //   // 测试更新值的功能
-  //   hashTable.put('key1', 'new_value1')
-  //   expect(hashTable.get('key1')).toBe('new_value1')
-  // })
+    // 测试更新值的功能
+    hashTable.put('key1', 'new_value1')
+    expect(hashTable.get('key1')).toBe('new_value1')
+  })
 
   // test('delete method', () => {
   //   hashTable.put('key1', 'value1')
