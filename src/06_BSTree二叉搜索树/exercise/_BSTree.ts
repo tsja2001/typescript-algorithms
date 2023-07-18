@@ -89,7 +89,7 @@ export class _BSTree<T> implements IBSTree<T> {
   }
   getMaxValue(): T | null {
     let currentNode: TreeNode<T> | null = this.root
-    while(currentNode?.right) {
+    while (currentNode?.right) {
       currentNode = currentNode.right
     }
 
@@ -97,7 +97,7 @@ export class _BSTree<T> implements IBSTree<T> {
   }
   getMinValue(): T | null {
     let currentNode: TreeNode<T> | null = this.root
-    while(currentNode?.left) {
+    while (currentNode?.left) {
       currentNode = currentNode?.left
     }
 
@@ -126,9 +126,68 @@ export class _BSTree<T> implements IBSTree<T> {
     return this.searchNode(value) !== null
   }
   remove(value: T): boolean {
-    throw new Error('Method not implemented.')
+    const removedNode = this.searchNode(value)
+    if (!removedNode) return false
+
+    // 1. 为根节点
+    if (!removedNode.left && !removedNode.right) {
+      if (removedNode.isLeft ) {
+        removedNode.parent!.left = null
+      } else {
+        removedNode.parent!.right = null
+      }
+    }
+    // 2. 只有一个子节点
+    else if (
+      removedNode.left !== null &&
+      removedNode.right === null
+    ) {
+      if (removedNode.isLeft) {
+        removedNode.parent!.left = removedNode.left
+      } else {
+        removedNode.parent!.right = removedNode.left
+      }
+    } else if (
+      removedNode.right !== null &&
+      removedNode.left === null
+    ) {
+      if (removedNode.isLeft) {
+        removedNode.parent!.left = removedNode.right
+      } else {
+        removedNode.parent!.right = removedNode.right
+      }
+    }
+
+    // 3. 有两个子节点
+    else if(removedNode.left && removedNode.right) {
+      const successorNode = this.getSuccessor(removedNode)
+
+      if(successorNode.isLeft) successorNode!.parent!.left = null
+      if(successorNode.isRight) successorNode!.parent!.right = null
+
+      successorNode.right = removedNode.right
+
+      if(removedNode.isLeft) {
+        removedNode.parent!.left = successorNode
+      }else {
+        removedNode.parent!.left = successorNode
+      }
+    }
+
+    return true
   }
   getSuccessor(delNode: TreeNode<T>): TreeNode<T> {
-    throw new Error('Method not implemented.')
+    let currentNode = delNode
+
+    
+    if(currentNode?.right) {
+      currentNode = currentNode.right
+    }
+
+    while(currentNode?.left) {
+      currentNode = currentNode.left
+    }
+
+    return currentNode
   }
 }
