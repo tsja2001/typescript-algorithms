@@ -64,7 +64,7 @@ describe('BSTree', () => {
     mockPrint.mockRestore();
   });
 
-  describe('BSTree', () => {
+  describe('BSTree delete', () => {
     let bst: BSTree<number>;
   
     beforeEach(() => {
